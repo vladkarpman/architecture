@@ -1,9 +1,9 @@
 package io.shelfy.architecture.data.mappers
 
-import com.vladk.architecture.api.ApiConstants
-import com.vladk.architecture.api.response.MovieVideoJson
-import com.vladk.architecture.domain.model.MovieVideo
-import com.vladk.architecture.domain.mappers.Mapper
+import io.shelfy.architecture.api.ApiConstants
+import io.shelfy.architecture.api.response.MovieVideoJson
+import io.shelfy.architecture.domain.model.MovieVideo
+import io.shelfy.architecture.domain.mappers.Mapper
 
 class MovieVideoMapper : Mapper<MovieVideoJson, MovieVideo> {
 

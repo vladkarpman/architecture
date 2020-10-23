@@ -4,7 +4,7 @@ import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.BackgroundColorSpan
-import com.vladk.architecture.domain.model.Movie
+import io.shelfy.architecture.domain.model.Movie
 
 class MovieDescriptionFormatter {
 

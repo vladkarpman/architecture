@@ -1,7 +1,7 @@
 package io.shelfy.architecture.data
 
-import com.vladk.architecture.api.response.MovieJson
-import com.vladk.architecture.api.response.MovieVideoJson
+import io.shelfy.architecture.api.response.MovieJson
+import io.shelfy.architecture.api.response.MovieVideoJson
 
 interface MoviesDataSource {
 

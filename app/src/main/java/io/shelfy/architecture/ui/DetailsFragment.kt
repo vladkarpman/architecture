@@ -9,11 +9,11 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.vladk.architecture.Dependencies
-import com.vladk.architecture.R
-import com.vladk.architecture.domain.model.Movie
-import com.vladk.architecture.presentation.MovieDetailsViewModel
-import com.vladk.architecture.ui.formatters.MovieDescriptionFormatter
+import io.shelfy.architecture.Dependencies
+import io.shelfy.architecture.R
+import io.shelfy.architecture.domain.model.Movie
+import io.shelfy.architecture.presentation.MovieDetailsViewModel
+import io.shelfy.architecture.ui.formatters.MovieDescriptionFormatter
 import coil.api.load
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 

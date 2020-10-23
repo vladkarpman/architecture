@@ -1,6 +1,6 @@
 package io.shelfy.architecture.cache
 
-import com.vladk.architecture.api.response.MovieJson
+import io.shelfy.architecture.api.response.MovieJson
 
 object MoviesStore {
 

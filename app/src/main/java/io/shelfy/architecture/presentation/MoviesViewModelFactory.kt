@@ -2,8 +2,8 @@ package io.shelfy.architecture.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.vladk.architecture.domain.usecase.GetMoviesByQueryUseCase
-import com.vladk.architecture.domain.usecase.GetPopularMoviesUseCase
+import io.shelfy.architecture.domain.usecase.GetMoviesByQueryUseCase
+import io.shelfy.architecture.domain.usecase.GetPopularMoviesUseCase
 
 class MoviesViewModelFactory(
     private val getPopularMoviesUseCase: GetPopularMoviesUseCase,

@@ -1,8 +1,8 @@
 package io.shelfy.architecture.cache
 
-import com.vladk.architecture.api.response.MovieVideoJson
-import com.vladk.architecture.data.MoviesDataSource
-import com.vladk.architecture.data.MoviesResult
+import io.shelfy.architecture.api.response.MovieVideoJson
+import io.shelfy.architecture.data.MoviesDataSource
+import io.shelfy.architecture.data.MoviesResult
 
 class LocalDataSource : MoviesDataSource {
 

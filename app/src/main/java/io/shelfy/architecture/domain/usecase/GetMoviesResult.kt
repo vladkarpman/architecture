@@ -1,6 +1,6 @@
 package io.shelfy.architecture.domain.usecase
 
-import com.vladk.architecture.domain.model.Movie
+import io.shelfy.architecture.domain.model.Movie
 
 sealed class GetMoviesResult {
 

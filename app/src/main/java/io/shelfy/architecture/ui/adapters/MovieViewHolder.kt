@@ -2,7 +2,7 @@ package io.shelfy.architecture.ui.adapters
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.vladk.architecture.domain.model.Movie
+import io.shelfy.architecture.domain.model.Movie
 import coil.api.load
 import kotlinx.android.synthetic.main.item_movie.view.*
 

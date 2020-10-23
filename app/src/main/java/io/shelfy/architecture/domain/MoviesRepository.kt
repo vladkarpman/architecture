@@ -1,7 +1,7 @@
 package io.shelfy.architecture.domain
 
-import com.vladk.architecture.domain.model.Movie
-import com.vladk.architecture.domain.model.MovieVideo
+import io.shelfy.architecture.domain.model.Movie
+import io.shelfy.architecture.domain.model.MovieVideo
 
 interface MoviesRepository {
 

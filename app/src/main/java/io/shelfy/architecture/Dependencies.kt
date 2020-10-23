@@ -1,16 +1,16 @@
 package io.shelfy.architecture
 
-import com.vladk.architecture.api.ApiDataSource
-import com.vladk.architecture.cache.LocalDataSource
-import com.vladk.architecture.data.MoviesRepositoryImpl
-import com.vladk.architecture.data.MoviesDataSource
-import com.vladk.architecture.data.mappers.MovieMapper
-import com.vladk.architecture.data.mappers.MovieVideoMapper
-import com.vladk.architecture.domain.MoviesRepository
-import com.vladk.architecture.domain.model.Movie
-import com.vladk.architecture.domain.usecase.*
-import com.vladk.architecture.presentation.MovieDetailsViewModelFactory
-import com.vladk.architecture.presentation.MoviesViewModelFactory
+import io.shelfy.architecture.api.ApiDataSource
+import io.shelfy.architecture.cache.LocalDataSource
+import io.shelfy.architecture.data.MoviesRepositoryImpl
+import io.shelfy.architecture.data.MoviesDataSource
+import io.shelfy.architecture.data.mappers.MovieMapper
+import io.shelfy.architecture.data.mappers.MovieVideoMapper
+import io.shelfy.architecture.domain.MoviesRepository
+import io.shelfy.architecture.domain.model.Movie
+import io.shelfy.architecture.domain.usecase.*
+import io.shelfy.architecture.presentation.MovieDetailsViewModelFactory
+import io.shelfy.architecture.presentation.MoviesViewModelFactory
 
 object Dependencies {
 

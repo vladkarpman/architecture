@@ -1,11 +1,11 @@
 package io.shelfy.architecture.api
 
-import com.vladk.architecture.api.response.MovieVideoJson
-import com.vladk.architecture.api.response.MovieVideosResponse
-import com.vladk.architecture.api.response.PopularMoviesResponse
-import com.vladk.architecture.data.MoviesDataSource
-import com.vladk.architecture.data.MoviesResult
-import com.vladk.architecture.cache.MoviesStore
+import io.shelfy.architecture.api.response.MovieVideoJson
+import io.shelfy.architecture.api.response.MovieVideosResponse
+import io.shelfy.architecture.api.response.PopularMoviesResponse
+import io.shelfy.architecture.data.MoviesDataSource
+import io.shelfy.architecture.data.MoviesResult
+import io.shelfy.architecture.cache.MoviesStore
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

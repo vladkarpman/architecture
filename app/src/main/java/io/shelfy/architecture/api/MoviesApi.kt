@@ -1,7 +1,7 @@
 package io.shelfy.architecture.api
 
-import com.vladk.architecture.api.response.MovieVideosResponse
-import com.vladk.architecture.api.response.PopularMoviesResponse
+import io.shelfy.architecture.api.response.MovieVideosResponse
+import io.shelfy.architecture.api.response.PopularMoviesResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

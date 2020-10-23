@@ -2,8 +2,8 @@ package io.shelfy.architecture.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.vladk.architecture.domain.model.Movie
-import com.vladk.architecture.domain.usecase.GetMovieTrailerUseCase
+import io.shelfy.architecture.domain.model.Movie
+import io.shelfy.architecture.domain.usecase.GetMovieTrailerUseCase
 
 class MovieDetailsViewModelFactory(
     private val movie: Movie,

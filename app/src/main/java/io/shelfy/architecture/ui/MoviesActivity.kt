@@ -8,12 +8,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.vladk.architecture.Dependencies
-import com.vladk.architecture.R
-import com.vladk.architecture.presentation.MoviesViewModel
-import com.vladk.architecture.presentation.MoviesViewModelFactory
-import com.vladk.architecture.ui.adapters.MoviesAdapter
-import com.vladk.architecture.ui.extensions.doOnQueryTextChange
+import io.shelfy.architecture.Dependencies
+import io.shelfy.architecture.R
+import io.shelfy.architecture.presentation.MoviesViewModel
+import io.shelfy.architecture.presentation.MoviesViewModelFactory
+import io.shelfy.architecture.ui.adapters.MoviesAdapter
+import io.shelfy.architecture.ui.extensions.doOnQueryTextChange
 import kotlinx.android.synthetic.main.activity_movies_list.*
 
 class MoviesActivity : AppCompatActivity() {

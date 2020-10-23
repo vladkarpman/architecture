@@ -1,7 +1,7 @@
 package io.shelfy.architecture.domain.usecase
 
-import com.vladk.architecture.domain.MoviesRepository
-import com.vladk.architecture.domain.model.MovieVideo
+import io.shelfy.architecture.domain.MoviesRepository
+import io.shelfy.architecture.domain.model.MovieVideo
 
 interface GetMovieTrailerUseCase {
 

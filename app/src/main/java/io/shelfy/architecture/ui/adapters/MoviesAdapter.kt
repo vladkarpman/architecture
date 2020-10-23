@@ -3,8 +3,8 @@ package io.shelfy.architecture.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.vladk.architecture.R
-import com.vladk.architecture.domain.model.Movie
+import io.shelfy.architecture.R
+import io.shelfy.architecture.domain.model.Movie
 
 class MoviesAdapter(private val clickListener: (itemPosition: Int) -> Unit) :
     RecyclerView.Adapter<MovieViewHolder>() {

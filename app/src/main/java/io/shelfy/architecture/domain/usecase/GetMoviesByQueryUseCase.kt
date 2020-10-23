@@ -1,8 +1,8 @@
 package io.shelfy.architecture.domain.usecase
 
-import com.vladk.architecture.domain.MoviesRepository
-import com.vladk.architecture.domain.RepositoryCallback
-import com.vladk.architecture.domain.model.Movie
+import io.shelfy.architecture.domain.MoviesRepository
+import io.shelfy.architecture.domain.RepositoryCallback
+import io.shelfy.architecture.domain.model.Movie
 
 interface GetMoviesByQueryUseCase {
 

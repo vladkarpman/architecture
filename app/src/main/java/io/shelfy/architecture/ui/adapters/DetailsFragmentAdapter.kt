@@ -3,8 +3,8 @@ package io.shelfy.architecture.ui.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.vladk.architecture.ui.DetailsFragment
-import com.vladk.architecture.domain.model.Movie
+import io.shelfy.architecture.ui.DetailsFragment
+import io.shelfy.architecture.domain.model.Movie
 
 class DetailsFragmentAdapter(
     fragmentManager: FragmentManager,

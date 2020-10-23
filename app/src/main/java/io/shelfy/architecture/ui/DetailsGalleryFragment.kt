@@ -7,11 +7,11 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.vladk.architecture.Dependencies
-import com.vladk.architecture.R
-import com.vladk.architecture.presentation.MoviesViewModel
-import com.vladk.architecture.presentation.MoviesViewModelFactory
-import com.vladk.architecture.ui.adapters.DetailsFragmentAdapter
+import io.shelfy.architecture.Dependencies
+import io.shelfy.architecture.R
+import io.shelfy.architecture.presentation.MoviesViewModel
+import io.shelfy.architecture.presentation.MoviesViewModelFactory
+import io.shelfy.architecture.ui.adapters.DetailsFragmentAdapter
 import kotlinx.android.synthetic.main.fragment_movies_gallery.*
 
 class DetailsGalleryFragment : Fragment(R.layout.fragment_movies_gallery) {
