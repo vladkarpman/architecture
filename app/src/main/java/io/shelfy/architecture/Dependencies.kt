@@ -1,16 +1,15 @@
 package io.shelfy.architecture
 
-import io.shelfy.architecture.api.ApiDataSource
-import io.shelfy.architecture.cache.LocalDataSource
-import io.shelfy.architecture.data.MoviesRepositoryImpl
-import io.shelfy.architecture.data.MoviesDataSource
-import io.shelfy.architecture.data.mappers.MovieMapper
-import io.shelfy.architecture.data.mappers.MovieVideoMapper
-import io.shelfy.architecture.domain.MoviesRepository
-import io.shelfy.architecture.domain.model.Movie
+import io.shelfy.architecture.data.datasource.remote.ApiDataSource
+import io.shelfy.architecture.data.datasource.local.LocalDataSourceImpl
+import io.shelfy.architecture.data.repository.MoviesRepositoryImpl
+import io.shelfy.architecture.data.repository.RemoteMoviesDataSource
+import io.shelfy.architecture.data.datasource.remote.mappers.MovieMapper
+import io.shelfy.architecture.data.datasource.remote.mappers.MovieVideoMapper
+import io.shelfy.architecture.data.repository.MoviesRepository
 import io.shelfy.architecture.domain.usecase.*
 import io.shelfy.architecture.presentation.MovieDetailsViewModelFactory
-import io.shelfy.architecture.presentation.MoviesViewModelFactory
+import io.shelfy.architecture.presentation.viewmodel.ViewModelFactory
 
 object Dependencies {
 
@@ -19,9 +18,6 @@ object Dependencies {
         createMoviesViewModelFactory(getPopularMoviesUseCase, getMoviesByQueryUseCase)
     }
 
-    fun createMovieDetailsViewModelFactory(movie: Movie): MovieDetailsViewModelFactory {
-        return MovieDetailsViewModelFactory(movie, getMovieTrailerUseCase)
-    }
 
     // Domain
     val getPopularMoviesUseCase by lazy {
@@ -53,26 +49,29 @@ object Dependencies {
     private fun createMoviesViewModelFactory(
         getPopularMoviesUseCase: GetPopularMoviesUseCase,
         getMoviesByQueryUseCase: GetMoviesByQueryUseCase
-    ): MoviesViewModelFactory {
-        return MoviesViewModelFactory(getPopularMoviesUseCase, getMoviesByQueryUseCase)
+    ): ViewModelFactory {
+        return ViewModelFactory(
+            getPopularMoviesUseCase,
+            getMoviesByQueryUseCase
+        )
     }
 
-    private fun createGetPopularMoviesUseCase(moviesRepository: MoviesRepository): GetPopularMoviesUseCase {
+    private fun createGetPopularMoviesUseCase(moviesRepository: io.shelfy.architecture.data.repository.MoviesRepository): GetPopularMoviesUseCase {
         return GetPopularMoviesUseCaseImpl(moviesRepository)
     }
 
-    private fun createGetMoviesByQueryUseCase(moviesRepository: MoviesRepository): GetMoviesByQueryUseCase {
+    private fun createGetMoviesByQueryUseCase(moviesRepository: io.shelfy.architecture.data.repository.MoviesRepository): GetMoviesByQueryUseCase {
         return GetMoviesByQueryUseCaseImpl(moviesRepository)
     }
 
-    private fun createGetMovieTrailerUseCase(moviesRepository: MoviesRepository): GetMovieTrailerUseCase {
+    private fun createGetMovieTrailerUseCase(moviesRepository: io.shelfy.architecture.data.repository.MoviesRepository): GetMovieTrailerUseCase {
         return GetMovieTrailerUseCaseImpl(moviesRepository)
     }
 
     private fun createMoviesRepository(
-        onlineDataSource: MoviesDataSource,
-        localDataSource: MoviesDataSource
-    ): MoviesRepository {
+        onlineDataSource: RemoteMoviesDataSource,
+        localDataSource: RemoteMoviesDataSource
+    ): io.shelfy.architecture.data.repository.MoviesRepository {
         return MoviesRepositoryImpl(
             onlineDataSource = onlineDataSource,
             localDataSource = localDataSource,
@@ -81,11 +80,11 @@ object Dependencies {
         )
     }
 
-    private fun createOnlineDataSource(): MoviesDataSource {
+    private fun createOnlineDataSource(): RemoteMoviesDataSource {
         return ApiDataSource()
     }
 
-    private fun createLocalDataSource(): MoviesDataSource {
-        return LocalDataSource()
+    private fun createLocalDataSource(): RemoteMoviesDataSource {
+        return LocalDataSourceImpl()
     }
 }
