@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Maybe;
-import io.reactivex.rxjava3.core.Single;
+import io.reactivex.Maybe;
+import io.reactivex.Single;
 import io.shelfy.architecture.Constants;
 import io.shelfy.architecture.data.source.remote.response.MovieJson;
 import io.shelfy.architecture.data.source.remote.response.MovieVideoJson;

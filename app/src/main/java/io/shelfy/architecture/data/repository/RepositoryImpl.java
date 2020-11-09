@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Maybe;
-import io.reactivex.rxjava3.core.Single;
+import io.reactivex.Maybe;
+import io.reactivex.Single;
 import io.shelfy.architecture.data.source.local.LocalDataSource;
 import io.shelfy.architecture.data.source.remote.RemoteDataSource;
 import io.shelfy.architecture.domain.entity.Movie;
@@ -45,8 +45,9 @@ public class RepositoryImpl implements Repository {
     public Maybe<MovieVideo> getMovieTrailer(int movieId) {
         if (networkConnectivityHelper.isConnected()) {
             return remoteDataSource.getMovieVideo(movieId)
-                    .flatMapSingle(movieVideo -> localDataSource.saveMovieVideo(movieId, movieVideo)
-                            .toSingleDefault(movieVideo));
+                    .flatMap(movieVideo -> localDataSource.saveMovieVideo(movieId, movieVideo)
+                            .toSingleDefault(movieVideo)
+                            .toMaybe());
         }
         return localDataSource.getMovieVideo(movieId);
     }
@@ -54,5 +55,6 @@ public class RepositoryImpl implements Repository {
     @Override
     public Maybe<Movie> getMovieById(int movieId) {
         return null;
+//        return remoteDataSource.getMovies();
     }
 }

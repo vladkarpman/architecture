@@ -7,8 +7,9 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.Disposables;
 import io.shelfy.architecture.domain.entity.Movie;
 import io.shelfy.architecture.domain.usecase.getmoviesbyquery.GetMoviesByQueryUseCase;
 import io.shelfy.architecture.domain.usecase.getmovies.GetPopularMoviesUseCase;
@@ -28,7 +29,7 @@ MoviesViewModel extends ViewModel {
 
     private final CompositeDisposable onClearDisposable = new CompositeDisposable();
 
-    private Disposable searchDisposable = Disposable.disposed();
+    private Disposable searchDisposable = Disposables.disposed();
 
     public MoviesViewModel(@NonNull GetPopularMoviesUseCase getPopularMoviesUseCase, @NonNull GetMoviesByQueryUseCase getMoviesByQueryUseCase) {
         this.getPopularMoviesUseCase = getPopularMoviesUseCase;

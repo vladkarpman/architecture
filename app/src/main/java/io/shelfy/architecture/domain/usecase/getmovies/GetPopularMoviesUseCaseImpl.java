@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Single;
+import io.reactivex.Single;
 import io.shelfy.architecture.data.repository.Repository;
 import io.shelfy.architecture.domain.entity.Movie;
 

@@ -3,7 +3,8 @@ package io.shelfy.architecture.presentation.common.viewmodel;
 import androidx.annotation.CallSuper;
 import androidx.lifecycle.ViewModel;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.disposables.CompositeDisposable;
+
 
 public abstract class BaseViewModel extends ViewModel implements CommonViewModel {
 

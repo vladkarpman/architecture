@@ -6,10 +6,10 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
-import org.jetbrains.annotations.NotNull;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.Disposables;
 import io.shelfy.architecture.presentation.common.view.CommonView;
 import io.shelfy.architecture.presentation.common.viewmodel.CommonViewModel;
 
@@ -32,8 +32,8 @@ public abstract class BaseController<V extends CommonView, VM extends CommonView
         this.viewModel = viewModel;
 
         onDestroyDisposables.addAll(
-                Disposable.fromAction(view::onDestroy),
-                Disposable.fromAction(viewModel::onDestroy)
+                Disposables.fromAction(view::onDestroy),
+                Disposables.fromAction(viewModel::onDestroy)
         );
     }
 
@@ -44,7 +44,7 @@ public abstract class BaseController<V extends CommonView, VM extends CommonView
         final ControllerLifecycleObserver lifecycleObserver = new ControllerLifecycleObserver(this);
         final Lifecycle lifecycle = lifecycleOwner.getLifecycle();
         lifecycle.addObserver(lifecycleObserver);
-        onDestroyDisposables.add(Disposable.fromAction(() -> lifecycle.removeObserver(lifecycleObserver)));
+        onDestroyDisposables.add(Disposables.fromAction(() -> lifecycle.removeObserver(lifecycleObserver)));
     }
 
     @NonNull
@@ -94,7 +94,7 @@ public abstract class BaseController<V extends CommonView, VM extends CommonView
         @NonNull
         private final CommonController controller;
 
-        private ControllerLifecycleObserver(@NotNull CommonController controller) {
+        private ControllerLifecycleObserver(@NonNull CommonController controller) {
             this.controller = controller;
         }
 

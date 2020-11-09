@@ -5,8 +5,8 @@ import androidx.annotation.NonNull;
 import java.util.List;
 import java.util.Observable;
 
-import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.internal.functions.Functions;
+import io.reactivex.Single;
+import io.reactivex.internal.functions.Functions;
 import io.shelfy.architecture.data.repository.Repository;
 import io.shelfy.architecture.domain.entity.Movie;
 

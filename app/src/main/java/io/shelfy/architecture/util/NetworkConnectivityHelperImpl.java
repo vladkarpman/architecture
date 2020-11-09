@@ -10,8 +10,9 @@ import androidx.annotation.NonNull;
 import java.util.HashSet;
 import java.util.Set;
 
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.subjects.BehaviorSubject;
+import io.reactivex.Observable;
+import io.reactivex.subjects.BehaviorSubject;
+
 
 /**
  * class for help to detect Connectivity isConnected

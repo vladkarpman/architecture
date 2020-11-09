@@ -1,6 +1,6 @@
 package io.shelfy.architecture.data.source.remote;
 
-import io.reactivex.rxjava3.core.Single;
+import io.reactivex.Single;
 import io.shelfy.architecture.data.source.remote.response.MovieVideosResponse;
 import io.shelfy.architecture.data.source.remote.response.PopularMoviesResponse;
 import retrofit2.http.GET;

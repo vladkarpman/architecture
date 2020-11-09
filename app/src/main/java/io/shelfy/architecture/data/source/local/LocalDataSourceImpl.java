@@ -1,13 +1,14 @@
 package io.shelfy.architecture.data.source.local;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.Maybe;
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
@@ -21,7 +22,6 @@ public class LocalDataSourceImpl implements LocalDataSource {
     @NonNull
     private final RealmConfiguration realmConfiguration;
 
-    @NonNull
     public LocalDataSourceImpl(@NonNull RealmConfiguration realmConfiguration) {
         this.realmConfiguration = realmConfiguration;
     }

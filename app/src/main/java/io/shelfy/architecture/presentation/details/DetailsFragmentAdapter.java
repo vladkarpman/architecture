@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import org.jetbrains.annotations.NotNull;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class DetailsFragmentAdapter extends FragmentStatePagerAdapter {
         notifyDataSetChanged();
     }
 
-    @NotNull
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         return DetailsFragment.newInstance(moviesList.get(position));

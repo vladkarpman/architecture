@@ -4,7 +4,6 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
-import org.jetbrains.annotations.NotNull;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -26,6 +25,7 @@ import io.shelfy.architecture.domain.usecase.getmovietrailer.GetMovieTrailerUseC
 import io.shelfy.architecture.util.NetworkConnectivityHelper;
 import io.shelfy.architecture.util.NetworkConnectivityHelperImpl;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static io.shelfy.architecture.Constants.BASE_URL;
@@ -66,7 +66,7 @@ public class AppComponent {
         return repository;
     }
 
-    @NotNull
+    @NonNull
     private NetworkConnectivityHelper provideNetworkConnectivityHelper() {
         if (networkConnectivityHelper == null) {
             networkConnectivityHelper = new NetworkConnectivityHelperImpl(application);
@@ -79,6 +79,7 @@ public class AppComponent {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
