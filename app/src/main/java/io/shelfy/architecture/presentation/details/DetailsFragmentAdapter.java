@@ -6,13 +6,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 import io.shelfy.architecture.domain.entity.Movie;
-import io.shelfy.architecture.presentation.details.DetailsFragment;
 
 public class DetailsFragmentAdapter extends FragmentStatePagerAdapter {
 

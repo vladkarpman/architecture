@@ -18,7 +18,7 @@ import io.shelfy.architecture.R;
 import io.shelfy.architecture.domain.entity.Movie;
 import io.shelfy.architecture.presentation.common.BaseFragment;
 
-class DetailsFragment extends BaseFragment {
+public class DetailsFragment extends BaseFragment {
 
     private static final String MOVIE_ID = "movie_id";
 
