@@ -15,7 +15,7 @@ import io.shelfy.architecture.R;
 import io.shelfy.architecture.presentation.common.BaseActivity;
 import io.shelfy.architecture.presentation.details.DetailsGalleryFragment;
 
-class MoviesActivity extends BaseActivity {
+public class MoviesActivity extends BaseActivity {
 
     private MoviesAdapter moviesAdapter;
 

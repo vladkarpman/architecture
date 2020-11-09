@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.NotNull;
 
+import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.shelfy.architecture.data.repository.Repository;
 import io.shelfy.architecture.data.repository.RepositoryImpl;
@@ -51,6 +52,8 @@ public class AppComponent {
 
     public AppComponent(@NonNull Application application) {
         this.application = application;
+        // need to init realm
+        Realm.init(application);
     }
 
     @NonNull
