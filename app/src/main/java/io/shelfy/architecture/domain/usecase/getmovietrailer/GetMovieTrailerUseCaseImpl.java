@@ -1,9 +1,9 @@
-package io.shelfy.architecture.domain.usecase;
+package io.shelfy.architecture.domain.usecase.getmovietrailer;
 
 import androidx.annotation.NonNull;
 
 import io.reactivex.rxjava3.core.Maybe;
-import io.shelfy.architecture.domain.Repository;
+import io.shelfy.architecture.data.repository.Repository;
 import io.shelfy.architecture.domain.entity.MovieVideo;
 
 public class GetMovieTrailerUseCaseImpl implements GetMovieTrailerUseCase {

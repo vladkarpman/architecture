@@ -6,31 +6,31 @@ import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.NotNull;
 
-import io.shelfy.architecture.ApiConstants;
-import io.shelfy.architecture.common.Mapper;
-import io.shelfy.architecture.data.repository.LocalDataSource;
-import io.shelfy.architecture.data.repository.RemoteDataSource;
+import io.realm.RealmConfiguration;
+import io.shelfy.architecture.data.repository.Repository;
 import io.shelfy.architecture.data.repository.RepositoryImpl;
+import io.shelfy.architecture.data.source.local.LocalDataSource;
 import io.shelfy.architecture.data.source.local.LocalDataSourceImpl;
 import io.shelfy.architecture.data.source.remote.MoviesApi;
+import io.shelfy.architecture.data.source.remote.RemoteDataSource;
 import io.shelfy.architecture.data.source.remote.RemoteDataSourceImpl;
-import io.shelfy.architecture.data.source.remote.mappers.MovieMapper;
-import io.shelfy.architecture.data.source.remote.mappers.MovieVideoMapper;
-import io.shelfy.architecture.data.source.remote.response.MovieJson;
-import io.shelfy.architecture.data.source.remote.response.MovieVideoJson;
-import io.shelfy.architecture.domain.Repository;
-import io.shelfy.architecture.domain.entity.Movie;
-import io.shelfy.architecture.domain.entity.MovieVideo;
-import io.shelfy.architecture.domain.usecase.GetMovieByIdUseCase;
-import io.shelfy.architecture.domain.usecase.GetMovieByIdUseCaseImpl;
-import io.shelfy.architecture.domain.usecase.GetMovieTrailerUseCase;
-import io.shelfy.architecture.domain.usecase.GetMovieTrailerUseCaseImpl;
-import io.shelfy.architecture.domain.usecase.GetMoviesByQueryUseCase;
-import io.shelfy.architecture.domain.usecase.GetMoviesByQueryUseCaseImpl;
-import io.shelfy.architecture.domain.usecase.GetPopularMoviesUseCase;
-import io.shelfy.architecture.domain.usecase.GetPopularMoviesUseCaseImpl;
+import io.shelfy.architecture.domain.usecase.getmoviebyid.GetMovieByIdUseCase;
+import io.shelfy.architecture.domain.usecase.getmoviebyid.GetMovieByIdUseCaseImpl;
+import io.shelfy.architecture.domain.usecase.getmovies.GetPopularMoviesUseCase;
+import io.shelfy.architecture.domain.usecase.getmovies.GetPopularMoviesUseCaseImpl;
+import io.shelfy.architecture.domain.usecase.getmoviesbyquery.GetMoviesByQueryUseCase;
+import io.shelfy.architecture.domain.usecase.getmoviesbyquery.GetMoviesByQueryUseCaseImpl;
+import io.shelfy.architecture.domain.usecase.getmovietrailer.GetMovieTrailerUseCase;
+import io.shelfy.architecture.domain.usecase.getmovietrailer.GetMovieTrailerUseCaseImpl;
+import io.shelfy.architecture.util.NetworkConnectivityHelper;
+import io.shelfy.architecture.util.NetworkConnectivityHelperImpl;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static io.shelfy.architecture.Constants.BASE_URL;
+import static io.shelfy.architecture.Constants.DB_FILE_NAME;
+import static io.shelfy.architecture.Constants.SCHEMA_VERSION;
+import static io.shelfy.architecture.Constants.SERVER_API_KEY;
 
 public class AppComponent {
 
@@ -41,13 +41,13 @@ public class AppComponent {
     private Retrofit retrofit;
     private RemoteDataSource remoteDataSource;
     private MoviesApi moviesApi;
-    private Mapper<MovieJson, Movie> movieMapper;
-    private Mapper<MovieVideoJson, MovieVideo> movieVideoMapper;
     private LocalDataSource localDataSource;
     private GetPopularMoviesUseCase getPopularMoviesUseCase;
     private GetMoviesByQueryUseCase getMoviesByQueryUseCase;
     private GetMovieTrailerUseCase getMovieTrailerUseCase;
     private GetMovieByIdUseCase getMovieByIdUseCase;
+    private NetworkConnectivityHelper networkConnectivityHelper;
+    private RealmConfiguration realmConfiguration;
 
     public AppComponent(@NonNull Application application) {
         this.application = application;
@@ -56,20 +56,41 @@ public class AppComponent {
     @NonNull
     public Repository provideRepository() {
         if (repository == null) {
-            repository = new RepositoryImpl(provideLocalDataSource(), provideRemoteDataSource());
+            repository = new RepositoryImpl(provideLocalDataSource(),
+                    provideRemoteDataSource(),
+                    provideNetworkConnectivityHelper());
         }
         return repository;
+    }
+
+    @NotNull
+    private NetworkConnectivityHelper provideNetworkConnectivityHelper() {
+        if (networkConnectivityHelper == null) {
+            networkConnectivityHelper = new NetworkConnectivityHelperImpl(application);
+        }
+        return networkConnectivityHelper;
     }
 
     @NonNull
     private Retrofit provideRetrofit() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(ApiConstants.BASE_URL)
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
+    }
+
+    @NonNull
+    private RealmConfiguration provideRealmConfiguration() {
+        if (realmConfiguration == null) {
+            realmConfiguration = new RealmConfiguration.Builder()
+                    .name(DB_FILE_NAME)
+                    .schemaVersion(SCHEMA_VERSION)
+                    .build();
+        }
+        return realmConfiguration;
     }
 
     @NonNull
@@ -85,34 +106,16 @@ public class AppComponent {
         if (remoteDataSource == null) {
             remoteDataSource = new RemoteDataSourceImpl(
                     provideMoviesApi(),
-                    ApiConstants.SERVER_API_KEY,
-                    provideMovieMapper(),
-                    provideMovieVideoMapper()
+                    SERVER_API_KEY
             );
         }
         return remoteDataSource;
     }
 
     @NonNull
-    private Mapper<MovieJson, Movie> provideMovieMapper() {
-        if (movieMapper == null) {
-            movieMapper = new MovieMapper();
-        }
-        return movieMapper;
-    }
-
-    @NotNull
-    private Mapper<MovieVideoJson, MovieVideo> provideMovieVideoMapper() {
-        if (movieVideoMapper == null) {
-            movieVideoMapper = new MovieVideoMapper();
-        }
-        return movieVideoMapper;
-    }
-
-    @NonNull
     private LocalDataSource provideLocalDataSource() {
         if (localDataSource == null) {
-            localDataSource = new LocalDataSourceImpl();
+            localDataSource = new LocalDataSourceImpl(provideRealmConfiguration());
         }
         return localDataSource;
     }

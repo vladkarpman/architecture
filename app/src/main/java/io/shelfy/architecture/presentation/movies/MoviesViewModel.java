@@ -10,8 +10,8 @@ import java.util.List;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.shelfy.architecture.domain.entity.Movie;
-import io.shelfy.architecture.domain.usecase.GetMoviesByQueryUseCase;
-import io.shelfy.architecture.domain.usecase.GetPopularMoviesUseCase;
+import io.shelfy.architecture.domain.usecase.getmoviesbyquery.GetMoviesByQueryUseCase;
+import io.shelfy.architecture.domain.usecase.getmovies.GetPopularMoviesUseCase;
 
 public class
 MoviesViewModel extends ViewModel {

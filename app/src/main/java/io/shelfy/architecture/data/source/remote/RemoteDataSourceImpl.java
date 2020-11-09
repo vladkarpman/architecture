@@ -6,8 +6,7 @@ import java.util.List;
 
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Single;
-import io.shelfy.architecture.common.Mapper;
-import io.shelfy.architecture.data.repository.RemoteDataSource;
+import io.shelfy.architecture.Constants;
 import io.shelfy.architecture.data.source.remote.response.MovieJson;
 import io.shelfy.architecture.data.source.remote.response.MovieVideoJson;
 import io.shelfy.architecture.data.source.remote.response.MovieVideosResponse;
@@ -23,33 +22,17 @@ public class RemoteDataSourceImpl implements RemoteDataSource {
     @NonNull
     private final String apiKey;
 
-    @NonNull
-    private final Mapper<MovieJson, Movie> movieMapper;
-
-    @NonNull
-    private final Mapper<MovieVideoJson, MovieVideo> movieVideoMapper;
-
-    public RemoteDataSourceImpl(@NonNull MoviesApi moviesApi,
-                                @NonNull String apiKey,
-                                @NonNull Mapper<MovieJson, Movie> movieMapper,
-                                @NonNull Mapper<MovieVideoJson, MovieVideo> movieVideoMapper) {
+    public RemoteDataSourceImpl(@NonNull MoviesApi moviesApi, @NonNull String apiKey) {
         this.moviesApi = moviesApi;
         this.apiKey = apiKey;
-        this.movieMapper = movieMapper;
-        this.movieVideoMapper = movieVideoMapper;
     }
 
     @Override
     public Single<List<Movie>> getMovies() {
         return moviesApi.getPopularMovies(apiKey)
                 .flattenAsObservable(PopularMoviesResponse::getMovies)
-                .map(movieMapper::map)
+                .map(this::map)
                 .toList();
-    }
-
-    @Override
-    public Single<List<Movie>> getMoviesStartWith(String query) {
-        throw new RuntimeException("not implemented");
     }
 
     @Override
@@ -57,6 +40,23 @@ public class RemoteDataSourceImpl implements RemoteDataSource {
         return moviesApi.getMovieVideos(movieId, apiKey)
                 .flattenAsObservable(MovieVideosResponse::getVideos)
                 .firstElement()
-                .map(movieVideoMapper::map);
+                .map(movieVideoJson -> map(movieId, movieVideoJson));
+    }
+
+    @NonNull
+    private MovieVideo map(int movieId, @NonNull MovieVideoJson movieVideoJson) {
+        return new MovieVideo(movieId, Constants.YOUTUBE_BASE_URL + movieVideoJson.getKey());
+    }
+
+    @NonNull
+    private Movie map(@NonNull MovieJson movieJson) {
+        return new Movie(
+                movieJson.getId(),
+                movieJson.getTitle(),
+                movieJson.getOverview(),
+                movieJson.getReleaseDate(),
+                Constants.POSTER_BASE_URL + movieJson.getPosterPath(),
+                Constants.BACKDROP_BASE_URL + movieJson.getBackdropPath()
+        );
     }
 }

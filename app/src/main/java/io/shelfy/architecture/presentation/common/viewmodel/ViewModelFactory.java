@@ -4,10 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import io.shelfy.architecture.domain.usecase.GetMovieByIdUseCase;
-import io.shelfy.architecture.domain.usecase.GetMovieTrailerUseCase;
-import io.shelfy.architecture.domain.usecase.GetMoviesByQueryUseCase;
-import io.shelfy.architecture.domain.usecase.GetPopularMoviesUseCase;
+import io.shelfy.architecture.domain.usecase.getmoviebyid.GetMovieByIdUseCase;
+import io.shelfy.architecture.domain.usecase.getmovietrailer.GetMovieTrailerUseCase;
+import io.shelfy.architecture.domain.usecase.getmoviesbyquery.GetMoviesByQueryUseCase;
+import io.shelfy.architecture.domain.usecase.getmovies.GetPopularMoviesUseCase;
 import io.shelfy.architecture.presentation.details.MovieDetailsViewModel;
 import io.shelfy.architecture.presentation.movies.MoviesViewModel;
 

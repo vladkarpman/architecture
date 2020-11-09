@@ -1,11 +1,11 @@
-package io.shelfy.architecture.domain.usecase;
+package io.shelfy.architecture.domain.usecase.getmoviesbyquery;
 
 import androidx.annotation.NonNull;
 
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Single;
-import io.shelfy.architecture.domain.Repository;
+import io.shelfy.architecture.data.repository.Repository;
 import io.shelfy.architecture.domain.entity.Movie;
 
 public class GetMoviesByQueryUseCaseImpl implements GetMoviesByQueryUseCase {

@@ -7,11 +7,10 @@ import io.reactivex.rxjava3.core.Single;
 import io.shelfy.architecture.domain.entity.Movie;
 import io.shelfy.architecture.domain.entity.MovieVideo;
 
-public interface RemoteDataSource {
+public interface Repository {
+    Single<List<Movie>> getPopularMovies();
 
-    Single<List<Movie>> getMovies();
+    Maybe<MovieVideo> getMovieTrailer(int movieId);
 
-    Single<List<Movie>> getMoviesStartWith(String query);
-
-    Maybe<MovieVideo> getMovieVideo(int movieId);
+    Maybe<Movie> getMovieById(int movieId);
 }

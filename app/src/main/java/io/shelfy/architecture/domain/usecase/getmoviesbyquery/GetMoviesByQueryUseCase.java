@@ -1,4 +1,4 @@
-package io.shelfy.architecture.domain.usecase;
+package io.shelfy.architecture.domain.usecase.getmoviesbyquery;
 
 import java.util.List;
 

@@ -1,10 +1,16 @@
 package io.shelfy.architecture.domain.entity;
 
 public class MovieVideo {
-    final String videoUrl;
+    private final String videoUrl;
+    private final int movieId;
 
-    public MovieVideo(String videoUrl) {
+    public MovieVideo(int movieId, String videoUrl) {
         this.videoUrl = videoUrl;
+        this.movieId = movieId;
+    }
+
+    public int getMovieId() {
+        return movieId;
     }
 
     public String getVideoUrl() {

@@ -2,16 +2,12 @@ package io.shelfy.architecture.presentation.details;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
 import io.shelfy.architecture.domain.entity.Movie;
 import io.shelfy.architecture.domain.entity.MovieVideo;
-import io.shelfy.architecture.domain.usecase.GetMovieByIdUseCase;
-import io.shelfy.architecture.domain.usecase.GetMovieTrailerUseCase;
-import io.shelfy.architecture.domain.usecase.GetPopularMoviesUseCase;
+import io.shelfy.architecture.domain.usecase.getmoviebyid.GetMovieByIdUseCase;
+import io.shelfy.architecture.domain.usecase.getmovietrailer.GetMovieTrailerUseCase;
 
 import static androidx.lifecycle.LiveDataReactiveStreams.fromPublisher;
 
