@@ -6,24 +6,23 @@ import java.util.List;
 
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Single;
-import io.shelfy.architecture.domain.MoviesRepository;
+import io.shelfy.architecture.domain.Repository;
 import io.shelfy.architecture.domain.entity.Movie;
 import io.shelfy.architecture.domain.entity.MovieVideo;
 
-public class RepositoryImpl implements MoviesRepository {
+public class RepositoryImpl implements Repository {
 
     @NonNull
-    private final LocalMoviesDataSource localDataSource;
+    private final LocalDataSource localDataSource;
 
     @NonNull
-    private final RemoteMoviesDataSource remoteDataSource;
+    private final RemoteDataSource remoteDataSource;
 
-    public RepositoryImpl(@NonNull LocalMoviesDataSource localDataSource,
-                          @NonNull RemoteMoviesDataSource remoteDataSource) {
+    public RepositoryImpl(@NonNull LocalDataSource localDataSource,
+                          @NonNull RemoteDataSource remoteDataSource) {
         this.localDataSource = localDataSource;
         this.remoteDataSource = remoteDataSource;
     }
-
 
     @Override
     public Single<List<Movie>> getPopularMovies() {
@@ -37,6 +36,11 @@ public class RepositoryImpl implements MoviesRepository {
 
     @Override
     public Maybe<MovieVideo> getMovieTrailer(int movieId) {
+        return null;
+    }
+
+    @Override
+    public Maybe<Movie> getMovieById(int movieId) {
         return null;
     }
 }

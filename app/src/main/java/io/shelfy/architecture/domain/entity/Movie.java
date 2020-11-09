@@ -39,7 +39,7 @@ public class Movie {
         return posterUrl;
     }
 
-    public String getBackdropUr() {
+    public String getBackdropUrl() {
         return backdropUr;
     }
 }

@@ -6,4 +6,8 @@ public class MovieVideo {
     public MovieVideo(String videoUrl) {
         this.videoUrl = videoUrl;
     }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
 }

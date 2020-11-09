@@ -4,22 +4,24 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
+import io.shelfy.architecture.common.component.AppComponent;
+
 
 public class App extends Application {
 
-    private CompositionRoot compositionRoot;
+    private AppComponent appComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        compositionRoot = new CompositionRoot(this);
+        appComponent = new AppComponent(this);
     }
 
     @NonNull
-    public CompositionRoot getCompositionRoot() {
-        if (compositionRoot == null) {
+    public AppComponent getAppComponent() {
+        if (appComponent == null) {
             throw new IllegalStateException("This function shouldn't be called if root is not initialized yet");
         }
-        return compositionRoot;
+        return appComponent;
     }
 }
