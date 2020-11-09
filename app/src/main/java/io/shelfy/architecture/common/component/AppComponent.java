@@ -25,7 +25,7 @@ import io.shelfy.architecture.domain.usecase.getmovietrailer.GetMovieTrailerUseC
 import io.shelfy.architecture.util.NetworkConnectivityHelper;
 import io.shelfy.architecture.util.NetworkConnectivityHelperImpl;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static io.shelfy.architecture.Constants.BASE_URL;
@@ -79,7 +79,7 @@ public class AppComponent {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.createAsync())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
