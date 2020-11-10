@@ -10,7 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import io.shelfy.architecture.R;
 import io.shelfy.architecture.presentation.common.BaseFragment;
-import io.shelfy.architecture.presentation.movies.MoviesViewModel;
+import io.shelfy.architecture.presentation.movies.viewmodel.MoviesViewModel;
 
 public class DetailsGalleryFragment extends BaseFragment {
 

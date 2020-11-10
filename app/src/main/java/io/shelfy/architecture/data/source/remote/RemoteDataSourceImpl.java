@@ -6,7 +6,7 @@ import java.util.List;
 
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.shelfy.architecture.Constants;
+import io.shelfy.architecture.common.Constants;
 import io.shelfy.architecture.data.source.remote.response.MovieJson;
 import io.shelfy.architecture.data.source.remote.response.MovieVideoJson;
 import io.shelfy.architecture.data.source.remote.response.MovieVideosResponse;

@@ -17,6 +17,7 @@ import java.util.Objects;
 import io.shelfy.architecture.R;
 import io.shelfy.architecture.domain.entity.Movie;
 import io.shelfy.architecture.presentation.common.BaseFragment;
+import io.shelfy.architecture.presentation.details.viewmodel.MovieDetailsViewModel;
 
 public class DetailsFragment extends BaseFragment {
 

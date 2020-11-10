@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.shelfy.architecture.R;
 import io.shelfy.architecture.presentation.common.BaseActivity;
 import io.shelfy.architecture.presentation.details.DetailsGalleryFragment;
+import io.shelfy.architecture.presentation.movies.viewmodel.MoviesViewModel;
 
 public class MoviesActivity extends BaseActivity {
 

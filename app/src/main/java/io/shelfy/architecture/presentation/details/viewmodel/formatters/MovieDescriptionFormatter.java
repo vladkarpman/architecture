@@ -1,4 +1,4 @@
-package io.shelfy.architecture.presentation.details.formatters;
+package io.shelfy.architecture.presentation.details.viewmodel.formatters;
 
 import android.graphics.Color;
 import android.text.Spannable;

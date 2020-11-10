@@ -28,10 +28,10 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static io.shelfy.architecture.Constants.BASE_URL;
-import static io.shelfy.architecture.Constants.DB_FILE_NAME;
-import static io.shelfy.architecture.Constants.SCHEMA_VERSION;
-import static io.shelfy.architecture.Constants.SERVER_API_KEY;
+import static io.shelfy.architecture.common.Constants.BASE_URL;
+import static io.shelfy.architecture.common.Constants.DB_FILE_NAME;
+import static io.shelfy.architecture.common.Constants.SCHEMA_VERSION;
+import static io.shelfy.architecture.common.Constants.SERVER_API_KEY;
 
 public class AppComponent {
 

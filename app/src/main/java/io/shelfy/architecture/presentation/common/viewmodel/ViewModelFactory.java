@@ -8,8 +8,8 @@ import io.shelfy.architecture.domain.usecase.getmoviebyid.GetMovieByIdUseCase;
 import io.shelfy.architecture.domain.usecase.getmovietrailer.GetMovieTrailerUseCase;
 import io.shelfy.architecture.domain.usecase.getmoviesbyquery.GetMoviesByQueryUseCase;
 import io.shelfy.architecture.domain.usecase.getmovies.GetPopularMoviesUseCase;
-import io.shelfy.architecture.presentation.details.MovieDetailsViewModel;
-import io.shelfy.architecture.presentation.movies.MoviesViewModel;
+import io.shelfy.architecture.presentation.details.viewmodel.MovieDetailsViewModel;
+import io.shelfy.architecture.presentation.movies.viewmodel.MoviesViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
 

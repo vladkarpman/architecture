@@ -1,4 +1,4 @@
-package io.shelfy.architecture.presentation.movies;
+package io.shelfy.architecture.presentation.movies.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -14,8 +14,7 @@ import io.shelfy.architecture.domain.entity.Movie;
 import io.shelfy.architecture.domain.usecase.getmoviesbyquery.GetMoviesByQueryUseCase;
 import io.shelfy.architecture.domain.usecase.getmovies.GetPopularMoviesUseCase;
 
-public class
-MoviesViewModel extends ViewModel {
+public class MoviesViewModel extends ViewModel {
 
     @NonNull
     private final GetPopularMoviesUseCase getPopularMoviesUseCase;

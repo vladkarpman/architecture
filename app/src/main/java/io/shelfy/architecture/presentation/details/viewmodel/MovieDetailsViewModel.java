@@ -1,4 +1,4 @@
-package io.shelfy.architecture.presentation.details;
+package io.shelfy.architecture.presentation.details.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;

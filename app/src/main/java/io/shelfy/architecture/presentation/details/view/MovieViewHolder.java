@@ -1,4 +1,4 @@
-package io.shelfy.architecture.presentation.details;
+package io.shelfy.architecture.presentation.details.view;
 
 import android.view.View;
 import android.widget.ImageView;

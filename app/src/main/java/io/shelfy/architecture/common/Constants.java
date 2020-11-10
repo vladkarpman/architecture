@@ -1,4 +1,4 @@
-package io.shelfy.architecture;
+package io.shelfy.architecture.common;
 
 public class Constants {
 

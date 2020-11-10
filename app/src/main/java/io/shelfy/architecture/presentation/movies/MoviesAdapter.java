@@ -14,7 +14,7 @@ import java.util.List;
 
 import io.shelfy.architecture.R;
 import io.shelfy.architecture.domain.entity.Movie;
-import io.shelfy.architecture.presentation.details.MovieViewHolder;
+import io.shelfy.architecture.presentation.details.view.MovieViewHolder;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
