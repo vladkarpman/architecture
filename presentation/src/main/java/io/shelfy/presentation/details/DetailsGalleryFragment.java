@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import io.shelfy.presentation.R;
 import io.shelfy.presentation.common.BaseFragment;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
@@ -40,15 +42,20 @@ public class DetailsGalleryFragment extends BaseFragment {
         detailsFragmentAdapter = new DetailsFragmentAdapter(getChildFragmentManager());
         moviesPager.setAdapter(detailsFragmentAdapter);
 
-        int position = -1;
-        if (savedInstanceState != null) {
-            position = savedInstanceState.getInt(ARGS_MOVIE_POSITION);
+        final AtomicInteger currentPosition = new AtomicInteger();
+        final Bundle arguments = savedInstanceState != null ? savedInstanceState : getArguments();
+        if (arguments != null) {
+            currentPosition.set(arguments.getInt(ARGS_MOVIE_POSITION));
         }
 
-        moviesPager.setCurrentItem(position);
-
         viewModel = fragmentComponent.provideViewModel(MoviesViewModel.class);
-        viewModel.getMovies().observe(getViewLifecycleOwner(), movies -> detailsFragmentAdapter.setData(movies));
+        viewModel.getMovies().observe(getViewLifecycleOwner(), movies -> {
+            detailsFragmentAdapter.setData(movies);
+            int currentItem = currentPosition.get();
+            if (currentItem != -1) {
+                moviesPager.setCurrentItem(currentItem, false);
+            }
+        });
         viewModel.getErrorMessages().observe(
                 getViewLifecycleOwner(),
                 message -> Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show());

@@ -5,7 +5,9 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 import io.reactivex.Maybe;
+import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.internal.functions.Functions;
 import io.shelfy.domain.Repository;
 import io.shelfy.domain.entity.Movie;
 import io.shelfy.domain.entity.MovieVideo;
@@ -47,7 +49,9 @@ public class RepositoryImpl implements Repository {
 
     @Override
     public Maybe<Movie> getMovieById(int movieId) {
-        return null;
-//        return remoteDataSource.getMovies();
+        return remoteDataSource.getMovies()
+                .flattenAsObservable(Functions.identity())
+                .filter(movie -> movie.getId() == movieId)
+                .firstElement();
     }
 }

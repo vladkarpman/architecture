@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveDataReactiveStreams;
 
 import com.bumptech.glide.Glide;
 
@@ -46,15 +47,11 @@ public class DetailsFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        movieId = Objects.requireNonNull(getArguments()).getInt(MOVIE_ID);
-    }
-
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        movieId = Objects.requireNonNull(getArguments()).getInt(MOVIE_ID);
+
         ivBackground = view.findViewById(R.id.ivBackground);
         ivPoster = view.findViewById(R.id.ivPoster);
         tvTitle = view.findViewById(R.id.tvTitle);
@@ -66,9 +63,12 @@ public class DetailsFragment extends BaseFragment {
 
         initViewModelObservers();
 
-        btnTrailer.setOnClickListener(v -> viewModel.loadTrailer(movieId).observe(
-                getViewLifecycleOwner(),
-                movieVideo -> openMovieTrailer(movieVideo.getVideoUrl())));
+        btnTrailer.setOnClickListener(v -> {
+            LiveDataReactiveStreams.fromPublisher(viewModel.loadTrailer(movieId).toFlowable())
+                    .observe(
+                            getViewLifecycleOwner(),
+                            movieVideo -> openMovieTrailer(movieVideo.getVideoUrl()));
+        });
     }
 
     private void openMovieTrailer(String url) {

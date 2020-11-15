@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import io.reactivex.Maybe;
+import io.reactivex.Single;
 import io.shelfy.domain.entity.Movie;
 import io.shelfy.domain.entity.MovieVideo;
 import io.shelfy.domain.usecase.getmoviebyid.GetMovieByIdUseCase;
@@ -25,8 +27,8 @@ public class MovieDetailsViewModel extends ViewModel {
         this.getMovieByIdUseCase = getMovieByIdUseCase;
     }
 
-    public LiveData<MovieVideo> loadTrailer(int movieId) {
-        return fromPublisher(getMovieTrailerUseCase.getTrailer(movieId).toFlowable());
+    public Maybe<MovieVideo> loadTrailer(int movieId) {
+        return getMovieTrailerUseCase.getTrailer(movieId);
     }
 
     public LiveData<Movie> getMovie(int movieId) {
