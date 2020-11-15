@@ -1,2 +1,8 @@
+include ':utils'
 include ':app'
+include ':localdatasource'
+include ':remotedatasource'
+include ':repository'
+include ':domain'
+include ':presentation'
 rootProject.name = "android-architecture"
