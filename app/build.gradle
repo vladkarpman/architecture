@@ -34,6 +34,7 @@ dependencies {
     implementation project(':repository')
     implementation project(':localdatasource')
     implementation project(':remotedatasource')
+    implementation project(':presentation')
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'

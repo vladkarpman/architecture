@@ -32,5 +32,4 @@ public class MovieDetailsViewModel extends ViewModel {
     public LiveData<Movie> getMovie(int movieId) {
         return fromPublisher(getMovieByIdUseCase.getMovie(movieId).toFlowable());
     }
-
 }

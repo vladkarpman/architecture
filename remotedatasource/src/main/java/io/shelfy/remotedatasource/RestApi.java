@@ -6,15 +6,17 @@ import java.util.List;
 
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.shelfy.domain.entity.Movie;
+import io.shelfy.domain.entity.MovieVideo;
 import io.shelfy.remotedatasource.response.MovieJson;
 import io.shelfy.remotedatasource.response.MovieVideoJson;
 import io.shelfy.remotedatasource.response.MovieVideosResponse;
 import io.shelfy.remotedatasource.response.PopularMoviesResponse;
-import io.shelfy.domain.entity.Movie;
-import io.shelfy.domain.entity.MovieVideo;
 import io.shelfy.repository.RemoteDataSource;
 
-import static io.shelfy.remotedatasource.RemoteDataSourceComponent.*;
+import static io.shelfy.remotedatasource.Constants.BACKDROP_BASE_URL;
+import static io.shelfy.remotedatasource.Constants.POSTER_BASE_URL;
+import static io.shelfy.remotedatasource.Constants.YOUTUBE_BASE_URL;
 
 class RestApi implements RemoteDataSource {
 
@@ -47,7 +49,7 @@ class RestApi implements RemoteDataSource {
 
     @NonNull
     private MovieVideo map(int movieId, @NonNull MovieVideoJson movieVideoJson) {
-        return new MovieVideo(movieId, getYoutubeBaseUrl() + movieVideoJson.getKey());
+        return new MovieVideo(movieId, YOUTUBE_BASE_URL + movieVideoJson.getKey());
     }
 
     @NonNull
@@ -57,8 +59,8 @@ class RestApi implements RemoteDataSource {
                 movieJson.getTitle(),
                 movieJson.getOverview(),
                 movieJson.getReleaseDate(),
-                getPosterBaseUrl() + movieJson.getPosterPath(),
-                getBackdropBaseUrl() + movieJson.getBackdropPath()
+                POSTER_BASE_URL + movieJson.getPosterPath(),
+                BACKDROP_BASE_URL + movieJson.getBackdropPath()
         );
     }
 }
