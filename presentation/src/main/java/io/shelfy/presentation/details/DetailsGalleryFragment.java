@@ -11,10 +11,10 @@ import androidx.viewpager.widget.ViewPager;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.shelfy.presentation.R;
-import io.shelfy.presentation.common.BaseFragment;
+import io.shelfy.presentation.common.CommonFragment;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
 
-public class DetailsGalleryFragment extends BaseFragment {
+public class DetailsGalleryFragment extends CommonFragment {
 
     private static final String ARGS_MOVIE_POSITION = "ARGS_MOVIE_POSITION";
 

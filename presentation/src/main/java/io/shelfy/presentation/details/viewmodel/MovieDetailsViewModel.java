@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import io.reactivex.Maybe;
-import io.reactivex.Single;
 import io.shelfy.domain.entity.Movie;
 import io.shelfy.domain.entity.MovieVideo;
 import io.shelfy.domain.usecase.getmoviebyid.GetMovieByIdUseCase;

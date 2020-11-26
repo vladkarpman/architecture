@@ -12,7 +12,7 @@ import io.reactivex.disposables.Disposables;
 import io.shelfy.presentation.common.view.CommonView;
 import io.shelfy.presentation.common.viewmodel.CommonViewModel;
 
-public abstract class BaseController<V extends CommonView, VM extends CommonViewModel> implements CommonController {
+public abstract class BaseViewController<V extends CommonView, VM extends CommonViewModel> implements CommonViewController {
 
     protected final CompositeDisposable onPauseDisposables = new CompositeDisposable();
     protected final CompositeDisposable onStopDisposables = new CompositeDisposable();
@@ -24,7 +24,7 @@ public abstract class BaseController<V extends CommonView, VM extends CommonView
     @NonNull
     protected final VM viewModel;
 
-    protected BaseController(
+    protected BaseViewController(
             @NonNull V view,
             @NonNull VM viewModel) {
         this.view = view;
@@ -36,9 +36,9 @@ public abstract class BaseController<V extends CommonView, VM extends CommonView
         );
     }
 
-    protected BaseController(@NonNull LifecycleOwner lifecycleOwner,
-                             @NonNull V view,
-                             @NonNull VM viewModel) {
+    protected BaseViewController(@NonNull LifecycleOwner lifecycleOwner,
+                                 @NonNull V view,
+                                 @NonNull VM viewModel) {
         this(view, viewModel);
         final ControllerLifecycleObserver lifecycleObserver = new ControllerLifecycleObserver(this);
         final Lifecycle lifecycle = lifecycleOwner.getLifecycle();
@@ -91,9 +91,9 @@ public abstract class BaseController<V extends CommonView, VM extends CommonView
 
     private static class ControllerLifecycleObserver implements DefaultLifecycleObserver {
         @NonNull
-        private final CommonController controller;
+        private final CommonViewController controller;
 
-        private ControllerLifecycleObserver(@NonNull CommonController controller) {
+        private ControllerLifecycleObserver(@NonNull CommonViewController controller) {
             this.controller = controller;
         }
 

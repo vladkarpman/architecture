@@ -1,4 +1,4 @@
-package io.shelfy.presentation.util;
+package io.shelfy.presentation.common.util;
 
 public interface NetworkConnectivityHelper {
     /**

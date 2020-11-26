@@ -1,6 +1,6 @@
 package io.shelfy.presentation.common.viewcontroller;
 
-interface CommonController {
+interface CommonViewController {
 
     default void onCreate() {
 

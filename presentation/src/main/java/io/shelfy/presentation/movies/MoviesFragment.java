@@ -10,11 +10,11 @@ import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.shelfy.presentation.R;
-import io.shelfy.presentation.common.BaseFragment;
+import io.shelfy.presentation.common.CommonFragment;
 import io.shelfy.presentation.details.DetailsGalleryFragment;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
 
-public class MoviesFragment extends BaseFragment {
+public class MoviesFragment extends CommonFragment {
 
     private MoviesAdapter moviesAdapter;
 

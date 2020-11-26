@@ -1,6 +1,8 @@
 package io.shelfy.presentation.common.viewmodel;
 
-public class DummyViewModel implements CommonViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class DummyViewModel extends ViewModel implements CommonViewModel {
 
     @Override
     public void onDestroy() {

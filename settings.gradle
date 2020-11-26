@@ -1,4 +1,4 @@
-include ':utils'
+include ':presentation-common'
 include ':app'
 include ':localdatasource'
 include ':remotedatasource'

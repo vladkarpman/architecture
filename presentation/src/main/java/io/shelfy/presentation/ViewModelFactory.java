@@ -1,4 +1,4 @@
-package io.shelfy.presentation.common.viewmodel;
+package io.shelfy.presentation;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;

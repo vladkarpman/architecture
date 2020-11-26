@@ -17,10 +17,10 @@ import java.util.Objects;
 
 import io.shelfy.presentation.R;
 import io.shelfy.domain.entity.Movie;
-import io.shelfy.presentation.common.BaseFragment;
+import io.shelfy.presentation.common.CommonFragment;
 import io.shelfy.presentation.details.viewmodel.MovieDetailsViewModel;
 
-public class DetailsFragment extends BaseFragment {
+public class DetailsFragment extends CommonFragment {
 
     private static final String MOVIE_ID = "movie_id";
 
