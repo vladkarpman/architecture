@@ -11,6 +11,10 @@ class BaseActivity extends CommonActivity {
     @NonNull
     @Override
     protected PresentationComponent createActivityComponent(@NonNull DomainComponent domainComponent) {
-        return null;
+        return new PresentationComponent(
+                this,
+                this,
+                new ViewModelFactory(domainComponent),
+                new ViewFactoryImpl());
     }
 }

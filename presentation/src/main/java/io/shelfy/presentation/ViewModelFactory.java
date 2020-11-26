@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import io.shelfy.domain.DomainComponent;
 import io.shelfy.domain.usecase.getmoviebyid.GetMovieByIdUseCase;
 import io.shelfy.domain.usecase.getmovietrailer.GetMovieTrailerUseCase;
 import io.shelfy.domain.usecase.getmoviesbyquery.GetMoviesByQueryUseCase;
@@ -25,15 +26,11 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
     private final GetMovieByIdUseCase getMovieByIdUseCase;
 
-    public ViewModelFactory(
-            @NonNull GetPopularMoviesUseCase getPopularMoviesUseCase,
-            @NonNull GetMoviesByQueryUseCase getMoviesByQueryUseCase,
-            @NonNull GetMovieTrailerUseCase getMovieTrailerUseCase,
-            @NonNull GetMovieByIdUseCase getMovieByIdUseCase) {
-        this.getPopularMoviesUseCase = getPopularMoviesUseCase;
-        this.getMoviesByQueryUseCase = getMoviesByQueryUseCase;
-        this.getMovieTrailerUseCase = getMovieTrailerUseCase;
-        this.getMovieByIdUseCase = getMovieByIdUseCase;
+    public ViewModelFactory(@NonNull DomainComponent domainComponent) {
+        this.getPopularMoviesUseCase = domainComponent.provideGetPopularMoviesUseCase();
+        this.getMoviesByQueryUseCase = domainComponent.provideGetMoviesByQueryUseCase();
+        this.getMovieTrailerUseCase = domainComponent.provideGetMovieTrailerUseCase();
+        this.getMovieByIdUseCase = domainComponent.provideGetMovieByIdUseCase();
     }
 
     @NonNull

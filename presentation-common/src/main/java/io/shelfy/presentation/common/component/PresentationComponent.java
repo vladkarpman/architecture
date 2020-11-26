@@ -13,7 +13,7 @@ import io.shelfy.presentation.common.view.DummyView;
 import io.shelfy.presentation.common.view.factory.ViewFactory;
 import io.shelfy.presentation.common.viewmodel.DummyViewModel;
 
-public abstract class PresentationComponent {
+public class PresentationComponent {
 
     @NonNull
     protected final LifecycleOwner lifecycleOwner;
