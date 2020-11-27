@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.core.util.Supplier;
 
+import io.shelfy.domain.CommonApplication;
 import io.shelfy.domain.DomainModule;
 import io.shelfy.domain.DomainModuleImpl;
 import io.shelfy.localdatasource.LocalDataSourceModuleImpl;
@@ -13,12 +14,12 @@ import io.shelfy.repository.RemoteDataSource;
 import io.shelfy.repository.RepositoryModuleImpl;
 
 
-public class App extends Application implements Supplier<DomainModule> {
+public class App extends Application implements CommonApplication {
 
     private DomainModule domainModule;
 
     @Override
-    public DomainModule get() {
+    public DomainModule getDomainModule() {
         if (domainModule == null) {
             final RemoteDataSource remoteDataSource = new RemoteDataSourceModuleImpl().provideRemoteDataSource();
             final LocalDataSource localDataSource = new LocalDataSourceModuleImpl(this).provideLocalDataSource();

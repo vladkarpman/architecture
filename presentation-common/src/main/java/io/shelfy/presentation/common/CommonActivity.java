@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Supplier;
 
+import io.shelfy.domain.CommonApplication;
 import io.shelfy.domain.DomainModule;
 import io.shelfy.presentation.common.module.ActivityModuleImpl;
 
@@ -19,7 +20,7 @@ public abstract class CommonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         DomainModule domainModule;
         try {
-            domainModule = ((Supplier<DomainModule>) getApplication()).get();
+            domainModule = ((CommonApplication) getApplication()).getDomainModule();
         } catch (ClassCastException e) {
             throw new IllegalStateException("Application class must provide domain component!");
         }
