@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.shelfy.repository.LocalDataSource;
+import io.shelfy.repository.LocalDataSourceModule;
 
 public class LocalDataSourceModuleImpl implements LocalDataSourceModule {
 

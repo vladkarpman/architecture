@@ -3,13 +3,14 @@ package io.shelfy.remotedatasource;
 import androidx.annotation.NonNull;
 
 import io.shelfy.repository.RemoteDataSource;
+import io.shelfy.repository.RemoteDataSourceModule;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static io.shelfy.remotedatasource.Constants.*;
 
-public class RemoteDataSourceComponent {
+public class RemoteDataSourceModuleImpl implements RemoteDataSourceModule {
 
     private Retrofit retrofit;
     private RemoteDataSource remoteDataSource;
@@ -35,6 +36,7 @@ public class RemoteDataSourceComponent {
         return moviesApi;
     }
 
+    @Override
     @NonNull
     public RemoteDataSource provideRemoteDataSource() {
         if (remoteDataSource == null) {

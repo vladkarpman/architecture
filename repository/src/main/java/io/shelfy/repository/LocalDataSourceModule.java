@@ -1,10 +1,10 @@
-package io.shelfy.localdatasource;
+package io.shelfy.repository;
 
 import androidx.annotation.NonNull;
 
 import io.shelfy.repository.LocalDataSource;
 
-interface LocalDataSourceModule {
+public interface LocalDataSourceModule {
     @NonNull
     LocalDataSource provideLocalDataSource();
 }

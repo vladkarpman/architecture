@@ -3,6 +3,7 @@ package io.shelfy.repository;
 import androidx.annotation.NonNull;
 
 import io.shelfy.domain.Repository;
+import io.shelfy.domain.RepositoryModule;
 
 public class RepositoryModuleImpl implements RepositoryModule {
 
@@ -20,6 +21,7 @@ public class RepositoryModuleImpl implements RepositoryModule {
         this.remoteDataSource = remoteDataSource;
     }
 
+    @Override
     @NonNull
     public Repository provideRepository() {
         if (repository == null) {
