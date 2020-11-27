@@ -10,7 +10,7 @@ import io.shelfy.presentation.common.CommonActivity;
 import io.shelfy.presentation.common.component.PresentationComponent;
 import io.shelfy.presentation.movies.MoviesFragment;
 
-public class MainActivity extends CommonActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,11 +23,5 @@ public class MainActivity extends CommonActivity {
                     .add(R.id.container, new MoviesFragment())
                     .commit();
         }
-    }
-
-    @NonNull
-    @Override
-    protected PresentationComponent createActivityComponent(@NonNull DomainComponent domainComponent) {
-        return new ActivityComponent(domainComponent, this, this);
     }
 }

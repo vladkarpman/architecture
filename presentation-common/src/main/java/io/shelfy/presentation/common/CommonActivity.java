@@ -8,11 +8,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Supplier;
 
 import io.shelfy.domain.DomainComponent;
+import io.shelfy.presentation.common.component.CommonActivityComponent;
 import io.shelfy.presentation.common.component.PresentationComponent;
 
 public abstract class CommonActivity extends AppCompatActivity {
 
-    protected PresentationComponent activityComponent;
+    protected CommonActivityComponent activityComponent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,5 +28,5 @@ public abstract class CommonActivity extends AppCompatActivity {
     }
 
     @NonNull
-    protected abstract PresentationComponent createActivityComponent(@NonNull DomainComponent domainComponent);
+    protected abstract CommonActivityComponent createActivityComponent(@NonNull DomainComponent domainComponent);
 }

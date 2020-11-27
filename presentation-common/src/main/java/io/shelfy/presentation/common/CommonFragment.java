@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Objects;
 
+import io.shelfy.presentation.common.component.CommonActivityComponent;
 import io.shelfy.presentation.common.component.PresentationComponent;
 
 public abstract class CommonFragment extends Fragment {
@@ -33,7 +34,7 @@ public abstract class CommonFragment extends Fragment {
     }
 
     @NonNull
-    protected abstract PresentationComponent createFragmentComponent(@NonNull PresentationComponent activityComponent);
+    protected abstract PresentationComponent createFragmentComponent(@NonNull CommonActivityComponent activityComponent);
 
     @Nullable
     public final <T extends View> T findViewById(@IdRes int id) {

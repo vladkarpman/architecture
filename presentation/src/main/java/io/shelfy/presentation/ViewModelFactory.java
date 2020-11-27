@@ -9,38 +9,29 @@ import io.shelfy.domain.usecase.getmoviebyid.GetMovieByIdUseCase;
 import io.shelfy.domain.usecase.getmovietrailer.GetMovieTrailerUseCase;
 import io.shelfy.domain.usecase.getmoviesbyquery.GetMoviesByQueryUseCase;
 import io.shelfy.domain.usecase.getmovies.GetPopularMoviesUseCase;
+import io.shelfy.presentation.common.view.factory.BaseViewFactory;
+import io.shelfy.presentation.common.viewmodel.BaseViewModelFactory;
 import io.shelfy.presentation.details.viewmodel.MovieDetailsViewModel;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
 
-public class ViewModelFactory implements ViewModelProvider.Factory {
-
-    @NonNull
-    private final GetPopularMoviesUseCase getPopularMoviesUseCase;
-
-    @NonNull
-    private final GetMoviesByQueryUseCase getMoviesByQueryUseCase;
-
-    @NonNull
-    private final GetMovieTrailerUseCase getMovieTrailerUseCase;
-
-    @NonNull
-    private final GetMovieByIdUseCase getMovieByIdUseCase;
+public class ViewModelFactory extends BaseViewModelFactory {
 
     public ViewModelFactory(@NonNull DomainComponent domainComponent) {
-        this.getPopularMoviesUseCase = domainComponent.provideGetPopularMoviesUseCase();
-        this.getMoviesByQueryUseCase = domainComponent.provideGetMoviesByQueryUseCase();
-        this.getMovieTrailerUseCase = domainComponent.provideGetMovieTrailerUseCase();
-        this.getMovieByIdUseCase = domainComponent.provideGetMovieByIdUseCase();
+        super(domainComponent);
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.equals(MoviesViewModel.class)) {
-            return (T) new MoviesViewModel(getPopularMoviesUseCase, getMoviesByQueryUseCase);
+            return (T) new MoviesViewModel(
+                    domainComponent.provideGetPopularMoviesUseCase(),
+                    domainComponent.provideGetMoviesByQueryUseCase());
         }
         if (modelClass.equals(MovieDetailsViewModel.class)) {
-            return (T) new MovieDetailsViewModel(getMovieTrailerUseCase, getMovieByIdUseCase);
+            return (T) new MovieDetailsViewModel(
+                    domainComponent.provideGetMovieTrailerUseCase(),
+                    domainComponent.provideGetMovieByIdUseCase());
         }
         throw new RuntimeException();
     }
