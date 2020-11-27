@@ -6,7 +6,7 @@ import io.shelfy.domain.DomainModule;
 import io.shelfy.presentation.common.CommonActivity;
 import io.shelfy.presentation.common.module.ActivityModuleImpl;
 
-class BaseActivity extends CommonActivity {
+public class BaseActivity extends CommonActivity {
 
     @NonNull
     @Override

@@ -2,6 +2,7 @@ package io.shelfy.presentation.common;
 
 import android.os.Bundle;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +17,8 @@ public abstract class CommonActivity extends AppCompatActivity {
     protected ActivityModuleImpl activityComponent;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    @CallSuper
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DomainModule domainModule;
         try {
