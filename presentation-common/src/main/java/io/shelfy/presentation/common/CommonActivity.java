@@ -10,11 +10,12 @@ import androidx.core.util.Supplier;
 
 import io.shelfy.domain.CommonApplication;
 import io.shelfy.domain.DomainModule;
+import io.shelfy.presentation.common.module.ActivityModule;
 import io.shelfy.presentation.common.module.ActivityModuleImpl;
 
 public abstract class CommonActivity extends AppCompatActivity {
 
-    protected ActivityModuleImpl activityComponent;
+    protected ActivityModule activityComponent;
 
     @Override
     @CallSuper
@@ -30,5 +31,5 @@ public abstract class CommonActivity extends AppCompatActivity {
     }
 
     @NonNull
-    protected abstract ActivityModuleImpl createActivityModule(@NonNull DomainModule domainModule);
+    protected abstract ActivityModule createActivityModule(@NonNull DomainModule domainModule);
 }

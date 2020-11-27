@@ -1,4 +1,8 @@
 package io.shelfy.presentation.common.module;
 
-interface FragmentModule extends PresentationModule {
+import androidx.annotation.NonNull;
+
+public interface FragmentModule extends PresentationModule {
+    @NonNull
+    ActivityModule getActivityComponent();
 }

@@ -28,8 +28,9 @@ public class FragmentModuleImpl extends PresentationModuleImpl implements Fragme
         this.activityComponent = activityComponent;
     }
 
+    @Override
     @NonNull
-    protected ActivityModule getActivityComponent() {
+    public ActivityModule getActivityComponent() {
         return activityComponent;
     }
 }
