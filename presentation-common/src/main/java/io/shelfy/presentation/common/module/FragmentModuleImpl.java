@@ -21,10 +21,16 @@ public class FragmentModuleImpl extends PresentationModuleImpl implements Fragme
         this.activityComponent = activityComponent;
     }
 
-    public FragmentModuleImpl(@NonNull ActivityModuleImpl activityComponent,
+    /**
+     * Unsafe constructor
+     */
+    public FragmentModuleImpl(@NonNull ActivityModule activityComponent,
                               @NonNull LifecycleOwner lifecycleOwner,
                               @NonNull ViewModelStoreOwner storeOwner) {
-        super(lifecycleOwner, storeOwner, activityComponent.viewModelFactory, activityComponent.viewFactory);
+        super(lifecycleOwner,
+                storeOwner,
+                ((ActivityModuleImpl) activityComponent).viewModelFactory,
+                ((ActivityModuleImpl) activityComponent).viewFactory);
         this.activityComponent = activityComponent;
     }
 

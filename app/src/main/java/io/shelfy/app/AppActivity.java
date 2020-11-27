@@ -15,6 +15,7 @@ public class AppActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
+            // TODO: 11/27/20 implement the Router
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.container, new MoviesFragment())

@@ -15,12 +15,13 @@ import com.bumptech.glide.Glide;
 
 import java.util.Objects;
 
+import io.shelfy.presentation.BaseFragment;
 import io.shelfy.presentation.R;
 import io.shelfy.domain.entity.Movie;
 import io.shelfy.presentation.common.CommonFragment;
 import io.shelfy.presentation.details.viewmodel.MovieDetailsViewModel;
 
-public class DetailsFragment extends CommonFragment {
+public class DetailsFragment extends BaseFragment {
 
     private static final String MOVIE_ID = "movie_id";
 
