@@ -32,8 +32,8 @@ dependencies {
 
     implementation project(':domain')
     implementation project(':repository')
-    implementation project(':localdatasource')
-    implementation project(':remotedatasource')
+    implementation project(':realmdb')
+    implementation project(':restapi')
     implementation project(':presentation')
 
     implementation 'androidx.appcompat:appcompat:1.2.0'

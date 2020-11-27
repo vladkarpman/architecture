@@ -30,7 +30,8 @@ public class MoviesViewModel extends ViewModel {
 
     private Disposable searchDisposable = Disposables.disposed();
 
-    public MoviesViewModel(@NonNull GetPopularMoviesUseCase getPopularMoviesUseCase, @NonNull GetMoviesByQueryUseCase getMoviesByQueryUseCase) {
+    public MoviesViewModel(@NonNull GetPopularMoviesUseCase getPopularMoviesUseCase,
+                           @NonNull GetMoviesByQueryUseCase getMoviesByQueryUseCase) {
         this.getPopularMoviesUseCase = getPopularMoviesUseCase;
         this.getMoviesByQueryUseCase = getMoviesByQueryUseCase;
 
