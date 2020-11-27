@@ -2,8 +2,8 @@ package io.shelfy.restapi;
 
 import androidx.annotation.NonNull;
 
-import io.shelfy.repository.RemoteDataSource;
-import io.shelfy.repository.RemoteDataSourceModule;
+import io.shelfy.repository.datasource.remote.RemoteDataSource;
+import io.shelfy.repository.datasource.remote.RemoteDataSourceModule;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

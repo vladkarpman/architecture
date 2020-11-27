@@ -8,8 +8,8 @@ import io.shelfy.domain.DomainModule;
 import io.shelfy.domain.DomainModuleImpl;
 import io.shelfy.realmdb.RealmDBModule;
 import io.shelfy.restapi.RestApiModule;
-import io.shelfy.repository.LocalDataSource;
-import io.shelfy.repository.RemoteDataSource;
+import io.shelfy.repository.datasource.local.LocalDataSource;
+import io.shelfy.repository.datasource.remote.RemoteDataSource;
 import io.shelfy.repository.RepositoryModuleImpl;
 
 

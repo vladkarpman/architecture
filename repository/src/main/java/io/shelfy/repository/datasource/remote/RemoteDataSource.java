@@ -1,18 +1,13 @@
-package io.shelfy.repository;
+package io.shelfy.repository.datasource.remote;
 
 import java.util.List;
 
-import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.shelfy.domain.entity.Movie;
 import io.shelfy.domain.entity.MovieVideo;
 
-public interface LocalDataSource {
-
-    Completable saveMovies(List<Movie> movies);
-
-    Completable saveMovieVideo(int movieId, MovieVideo movieVideo);
+public interface RemoteDataSource {
 
     Single<List<Movie>> getMovies();
 

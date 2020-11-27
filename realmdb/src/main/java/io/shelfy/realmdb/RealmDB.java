@@ -16,7 +16,7 @@ import io.shelfy.domain.entity.Movie;
 import io.shelfy.domain.entity.MovieVideo;
 import io.shelfy.realmdb.model.MovieRealm;
 import io.shelfy.realmdb.model.MovieVideoRealm;
-import io.shelfy.repository.LocalDataSource;
+import io.shelfy.repository.datasource.local.LocalDataSource;
 
 class RealmDB implements LocalDataSource {
 

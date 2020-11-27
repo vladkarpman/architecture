@@ -3,7 +3,7 @@ package io.shelfy.domain.usecase.getmovietrailer;
 import androidx.annotation.NonNull;
 
 import io.reactivex.Maybe;
-import io.shelfy.domain.Repository;
+import io.shelfy.domain.repository.Repository;
 import io.shelfy.domain.entity.MovieVideo;
 
 public class GetMovieTrailerUseCaseImpl implements GetMovieTrailerUseCase {

@@ -5,12 +5,13 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.internal.functions.Functions;
-import io.shelfy.domain.Repository;
+import io.shelfy.domain.repository.Repository;
 import io.shelfy.domain.entity.Movie;
 import io.shelfy.domain.entity.MovieVideo;
+import io.shelfy.repository.datasource.local.LocalDataSource;
+import io.shelfy.repository.datasource.remote.RemoteDataSource;
 
 public class RepositoryImpl implements Repository {
 

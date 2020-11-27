@@ -3,7 +3,7 @@ package io.shelfy.domain.usecase.getmoviebyid;
 
 import io.reactivex.Maybe;
 import io.reactivex.annotations.NonNull;
-import io.shelfy.domain.Repository;
+import io.shelfy.domain.repository.Repository;
 import io.shelfy.domain.entity.Movie;
 
 public class GetMovieByIdUseCaseImpl implements GetMovieByIdUseCase {

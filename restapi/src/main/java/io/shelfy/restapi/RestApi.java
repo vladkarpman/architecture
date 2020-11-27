@@ -12,7 +12,7 @@ import io.shelfy.restapi.response.MovieJson;
 import io.shelfy.restapi.response.MovieVideoJson;
 import io.shelfy.restapi.response.MovieVideosResponse;
 import io.shelfy.restapi.response.PopularMoviesResponse;
-import io.shelfy.repository.RemoteDataSource;
+import io.shelfy.repository.datasource.remote.RemoteDataSource;
 
 import static io.shelfy.restapi.Constants.BACKDROP_BASE_URL;
 import static io.shelfy.restapi.Constants.POSTER_BASE_URL;

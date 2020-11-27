@@ -2,6 +2,7 @@ package io.shelfy.domain;
 
 
 import io.reactivex.annotations.NonNull;
+import io.shelfy.domain.repository.Repository;
 import io.shelfy.domain.usecase.getmoviebyid.GetMovieByIdUseCase;
 import io.shelfy.domain.usecase.getmoviebyid.GetMovieByIdUseCaseImpl;
 import io.shelfy.domain.usecase.getmovies.GetPopularMoviesUseCase;

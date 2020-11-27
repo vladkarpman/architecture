@@ -2,8 +2,10 @@ package io.shelfy.repository;
 
 import androidx.annotation.NonNull;
 
-import io.shelfy.domain.Repository;
-import io.shelfy.domain.RepositoryModule;
+import io.shelfy.domain.repository.Repository;
+import io.shelfy.domain.repository.RepositoryModule;
+import io.shelfy.repository.datasource.local.LocalDataSource;
+import io.shelfy.repository.datasource.remote.RemoteDataSource;
 
 public class RepositoryModuleImpl implements RepositoryModule {
 

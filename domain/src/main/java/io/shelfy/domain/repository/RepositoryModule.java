@@ -1,4 +1,4 @@
-package io.shelfy.domain;
+package io.shelfy.domain.repository;
 
 
 import io.reactivex.annotations.NonNull;

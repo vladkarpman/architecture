@@ -6,7 +6,7 @@ import java.util.List;
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.internal.functions.Functions;
-import io.shelfy.domain.Repository;
+import io.shelfy.domain.repository.Repository;
 import io.shelfy.domain.entity.Movie;
 
 public class GetMoviesByQueryUseCaseImpl implements GetMoviesByQueryUseCase {

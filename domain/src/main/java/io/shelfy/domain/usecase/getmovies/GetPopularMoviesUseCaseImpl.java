@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 import io.reactivex.Single;
-import io.shelfy.domain.Repository;
+import io.shelfy.domain.repository.Repository;
 import io.shelfy.domain.entity.Movie;
 
 public class GetPopularMoviesUseCaseImpl implements GetPopularMoviesUseCase {

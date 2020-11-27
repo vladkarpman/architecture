@@ -1,4 +1,4 @@
-package io.shelfy.repository;
+package io.shelfy.repository.datasource.remote;
 
 import androidx.annotation.NonNull;
 
