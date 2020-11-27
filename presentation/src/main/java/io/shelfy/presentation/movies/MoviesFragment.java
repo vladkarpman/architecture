@@ -9,12 +9,13 @@ import androidx.annotation.Nullable;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.recyclerview.widget.RecyclerView;
 
+import io.shelfy.presentation.BaseFragment;
 import io.shelfy.presentation.R;
 import io.shelfy.presentation.common.CommonFragment;
 import io.shelfy.presentation.details.DetailsGalleryFragment;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
 
-public class MoviesFragment extends CommonFragment {
+public class MoviesFragment extends BaseFragment {
 
     private MoviesAdapter moviesAdapter;
 
