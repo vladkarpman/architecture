@@ -9,7 +9,6 @@ import io.shelfy.presentation.common.component.PresentationComponent;
 
 class BaseActivity extends CommonActivity {
 
-
     @NonNull
     @Override
     protected CommonActivityComponent createActivityComponent(@NonNull DomainComponent domainComponent) {

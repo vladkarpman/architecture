@@ -21,6 +21,13 @@ public class CommonFragmentComponent extends PresentationComponent {
         this.activityComponent = activityComponent;
     }
 
+    public CommonFragmentComponent(@NonNull CommonActivityComponent activityComponent,
+                                   @NonNull LifecycleOwner lifecycleOwner,
+                                   @NonNull ViewModelStoreOwner storeOwner) {
+        super(lifecycleOwner, storeOwner, activityComponent.viewModelFactory, activityComponent.viewFactory);
+        this.activityComponent = activityComponent;
+    }
+
     @NonNull
     protected CommonActivityComponent getActivityComponent() {
         return activityComponent;

@@ -23,10 +23,10 @@ public class PresentationComponent {
     private ViewModelProvider viewModelProvider;
 
     @NonNull
-    private final ViewModelProvider.Factory viewModelFactory;
+    final ViewModelProvider.Factory viewModelFactory;
 
     @NonNull
-    private final ViewFactory viewFactory;
+    final ViewFactory viewFactory;
 
     public PresentationComponent(
             @NonNull LifecycleOwner lifecycleOwner,

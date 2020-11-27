@@ -7,15 +7,11 @@ import io.shelfy.presentation.common.component.CommonActivityComponent;
 import io.shelfy.presentation.common.component.CommonFragmentComponent;
 import io.shelfy.presentation.common.component.PresentationComponent;
 
-class BaseFragment extends CommonFragment {
+public class BaseFragment extends CommonFragment {
 
     @NonNull
     @Override
     protected PresentationComponent createFragmentComponent(@NonNull CommonActivityComponent activityComponent) {
-        return new CommonFragmentComponent(activityComponent,
-                this,
-                this,
-                new ViewModelFactory(activityComponent.getDomainComponent()),
-                new ViewFactoryImpl());
+        return new CommonFragmentComponent(activityComponent, this, this);
     }
 }
