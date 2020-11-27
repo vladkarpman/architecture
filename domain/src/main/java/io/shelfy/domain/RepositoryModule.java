@@ -1,6 +1,7 @@
 package io.shelfy.domain;
 
-import androidx.annotation.NonNull;
+
+import io.reactivex.annotations.NonNull;
 
 public interface RepositoryModule {
     @NonNull
