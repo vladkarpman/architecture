@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import io.shelfy.domain.DomainModule;
 import io.shelfy.presentation.common.CommonActivity;
-import io.shelfy.presentation.common.component.ActivityModuleImpl;
+import io.shelfy.presentation.common.module.ActivityModuleImpl;
 
 class BaseActivity extends CommonActivity {
 

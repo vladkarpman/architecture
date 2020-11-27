@@ -1,4 +1,4 @@
-package io.shelfy.presentation.common.component;
+package io.shelfy.presentation.common.module;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;

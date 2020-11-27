@@ -3,9 +3,9 @@ package io.shelfy.presentation;
 import androidx.annotation.NonNull;
 
 import io.shelfy.presentation.common.CommonFragment;
-import io.shelfy.presentation.common.component.ActivityModuleImpl;
-import io.shelfy.presentation.common.component.FragmentModuleImpl;
-import io.shelfy.presentation.common.component.PresentationModule;
+import io.shelfy.presentation.common.module.ActivityModuleImpl;
+import io.shelfy.presentation.common.module.FragmentModuleImpl;
+import io.shelfy.presentation.common.module.PresentationModule;
 
 public class BaseFragment extends CommonFragment {
 

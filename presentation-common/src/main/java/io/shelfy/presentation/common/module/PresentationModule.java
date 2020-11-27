@@ -1,11 +1,11 @@
-package io.shelfy.presentation.common.component;
+package io.shelfy.presentation.common.module;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
 import io.shelfy.presentation.common.view.CommonView;
 
-interface PresentationModule {
+public interface PresentationModule {
     @NonNull
     <VM extends ViewModel> VM provideViewModel(@NonNull Class<VM> viewModelClass);
 

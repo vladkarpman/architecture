@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Objects;
 
-import io.shelfy.presentation.common.component.ActivityModuleImpl;
-import io.shelfy.presentation.common.component.PresentationModule;
+import io.shelfy.presentation.common.module.ActivityModuleImpl;
+import io.shelfy.presentation.common.module.PresentationModule;
 
 public abstract class CommonFragment extends Fragment {
 

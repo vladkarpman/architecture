@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Supplier;
 
 import io.shelfy.domain.DomainModule;
-import io.shelfy.presentation.common.component.ActivityModuleImpl;
+import io.shelfy.presentation.common.module.ActivityModuleImpl;
 
 public abstract class CommonActivity extends AppCompatActivity {
 
