@@ -8,7 +8,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.shelfy.repository.LocalDataSource;
 
-public class LocalDataSourceComponent {
+public class LocalDataSourceModuleImpl implements LocalDataSourceModule {
 
     // DB
     public static final String DB_FILE_NAME = "movies_db";
@@ -17,11 +17,12 @@ public class LocalDataSourceComponent {
     private LocalDataSource localDataSource;
     private RealmConfiguration realmConfiguration;
 
-    public LocalDataSourceComponent(Application application) {
+    public LocalDataSourceModuleImpl(Application application) {
         // need to init realm
         Realm.init(application);
     }
 
+    @Override
     @NonNull
     public LocalDataSource provideLocalDataSource() {
         if (localDataSource == null) {

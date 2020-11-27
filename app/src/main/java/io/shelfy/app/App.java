@@ -4,26 +4,27 @@ import android.app.Application;
 
 import androidx.core.util.Supplier;
 
-import io.shelfy.domain.DomainComponent;
-import io.shelfy.localdatasource.LocalDataSourceComponent;
+import io.shelfy.domain.DomainModule;
+import io.shelfy.domain.DomainModuleImpl;
+import io.shelfy.localdatasource.LocalDataSourceModuleImpl;
 import io.shelfy.remotedatasource.RemoteDataSourceComponent;
 import io.shelfy.repository.LocalDataSource;
 import io.shelfy.repository.RemoteDataSource;
-import io.shelfy.repository.RepositoryComponent;
+import io.shelfy.repository.RepositoryModuleImpl;
 
 
-public class App extends Application implements Supplier<DomainComponent> {
+public class App extends Application implements Supplier<DomainModule> {
 
-    private DomainComponent domainComponent;
+    private DomainModule domainModule;
 
     @Override
-    public DomainComponent get() {
-        if (domainComponent == null) {
+    public DomainModule get() {
+        if (domainModule == null) {
             final RemoteDataSource remoteDataSource = new RemoteDataSourceComponent().provideRemoteDataSource();
-            final LocalDataSource localDataSource = new LocalDataSourceComponent(this).provideLocalDataSource();
-            final RepositoryComponent repositoryComponent = new RepositoryComponent(localDataSource, remoteDataSource);
-            domainComponent = new DomainComponent(repositoryComponent.provideRepository());
+            final LocalDataSource localDataSource = new LocalDataSourceModuleImpl(this).provideLocalDataSource();
+            final RepositoryModuleImpl repositoryModule = new RepositoryModuleImpl(localDataSource, remoteDataSource);
+            domainModule = new DomainModuleImpl(repositoryModule.provideRepository());
         }
-        return domainComponent;
+        return domainModule;
     }
 }

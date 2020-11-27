@@ -3,15 +3,15 @@ package io.shelfy.presentation;
 import androidx.annotation.NonNull;
 
 import io.shelfy.presentation.common.CommonFragment;
-import io.shelfy.presentation.common.component.CommonActivityComponent;
-import io.shelfy.presentation.common.component.CommonFragmentComponent;
-import io.shelfy.presentation.common.component.PresentationComponent;
+import io.shelfy.presentation.common.component.ActivityModuleImpl;
+import io.shelfy.presentation.common.component.FragmentModuleImpl;
+import io.shelfy.presentation.common.component.PresentationModule;
 
 public class BaseFragment extends CommonFragment {
 
     @NonNull
     @Override
-    protected PresentationComponent createFragmentComponent(@NonNull CommonActivityComponent activityComponent) {
-        return new CommonFragmentComponent(activityComponent, this, this);
+    protected PresentationModule createFragmentModule(@NonNull ActivityModuleImpl activityComponent) {
+        return new FragmentModuleImpl(activityComponent, this, this);
     }
 }

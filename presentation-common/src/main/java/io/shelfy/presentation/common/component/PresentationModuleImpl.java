@@ -12,7 +12,7 @@ import io.shelfy.presentation.common.view.DummyView;
 import io.shelfy.presentation.common.view.factory.ViewFactory;
 import io.shelfy.presentation.common.viewmodel.DummyViewModel;
 
-public class PresentationComponent {
+public class PresentationModuleImpl implements PresentationModule {
 
     @NonNull
     protected final LifecycleOwner lifecycleOwner;
@@ -28,7 +28,7 @@ public class PresentationComponent {
     @NonNull
     final ViewFactory viewFactory;
 
-    public PresentationComponent(
+    public PresentationModuleImpl(
             @NonNull LifecycleOwner lifecycleOwner,
             @NonNull ViewModelStoreOwner storeOwner,
             @NonNull ViewModelProvider.Factory viewModelFactory,
@@ -49,6 +49,7 @@ public class PresentationComponent {
         });
     }
 
+    @Override
     @NonNull
     public <VM extends ViewModel> VM provideViewModel(@NonNull Class<VM> viewModelClass) {
         try {
@@ -58,6 +59,7 @@ public class PresentationComponent {
         }
     }
 
+    @Override
     @NonNull
     public <V extends CommonView> V provideView(@NonNull Class<V> viewClass) {
         try {

@@ -7,26 +7,25 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Supplier;
 
-import io.shelfy.domain.DomainComponent;
-import io.shelfy.presentation.common.component.CommonActivityComponent;
-import io.shelfy.presentation.common.component.PresentationComponent;
+import io.shelfy.domain.DomainModule;
+import io.shelfy.presentation.common.component.ActivityModuleImpl;
 
 public abstract class CommonActivity extends AppCompatActivity {
 
-    protected CommonActivityComponent activityComponent;
+    protected ActivityModuleImpl activityComponent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DomainComponent domainComponent;
+        DomainModule domainModule;
         try {
-            domainComponent = ((Supplier<DomainComponent>) getApplication()).get();
+            domainModule = ((Supplier<DomainModule>) getApplication()).get();
         } catch (ClassCastException e) {
             throw new IllegalStateException("Application class must provide domain component!");
         }
-        activityComponent = createActivityComponent(domainComponent);
+        activityComponent = createActivityModule(domainModule);
     }
 
     @NonNull
-    protected abstract CommonActivityComponent createActivityComponent(@NonNull DomainComponent domainComponent);
+    protected abstract ActivityModuleImpl createActivityModule(@NonNull DomainModule domainModule);
 }

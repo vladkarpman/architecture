@@ -1,23 +1,21 @@
 package io.shelfy.presentation.common.viewmodel;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStore;
 
-import io.shelfy.domain.DomainComponent;
+import io.shelfy.domain.DomainModule;
 
 public abstract class BaseViewModelFactory implements ViewModelProvider.Factory {
 
     @NonNull
-    protected final DomainComponent domainComponent;
+    protected final DomainModule domainModule;
 
-    public BaseViewModelFactory(@NonNull DomainComponent domainComponent) {
-        this.domainComponent = domainComponent;
+    public BaseViewModelFactory(@NonNull DomainModule domainModule) {
+        this.domainModule = domainModule;
     }
 
     @NonNull
-    public DomainComponent getDomainComponent() {
-        return domainComponent;
+    public DomainModule getDomainModule() {
+        return domainModule;
     }
 }

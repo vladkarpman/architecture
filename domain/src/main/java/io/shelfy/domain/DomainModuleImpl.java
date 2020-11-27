@@ -11,7 +11,7 @@ import io.shelfy.domain.usecase.getmoviesbyquery.GetMoviesByQueryUseCaseImpl;
 import io.shelfy.domain.usecase.getmovietrailer.GetMovieTrailerUseCase;
 import io.shelfy.domain.usecase.getmovietrailer.GetMovieTrailerUseCaseImpl;
 
-public class DomainComponent {
+public class DomainModuleImpl implements DomainModule {
 
     private GetPopularMoviesUseCase getPopularMoviesUseCase;
     private GetMoviesByQueryUseCase getMoviesByQueryUseCase;
@@ -21,10 +21,11 @@ public class DomainComponent {
     @NonNull
     private final Repository repository;
 
-    public DomainComponent(@NonNull Repository repository) {
+    public DomainModuleImpl(@NonNull Repository repository) {
         this.repository = repository;
     }
 
+    @Override
     @NonNull
     public GetPopularMoviesUseCase provideGetPopularMoviesUseCase() {
         if (getPopularMoviesUseCase == null) {
@@ -33,6 +34,7 @@ public class DomainComponent {
         return getPopularMoviesUseCase;
     }
 
+    @Override
     @NonNull
     public GetMoviesByQueryUseCase provideGetMoviesByQueryUseCase() {
         if (getMoviesByQueryUseCase == null) {
@@ -41,6 +43,7 @@ public class DomainComponent {
         return getMoviesByQueryUseCase;
     }
 
+    @Override
     @NonNull
     public GetMovieTrailerUseCase provideGetMovieTrailerUseCase() {
         if (getMovieTrailerUseCase == null) {
@@ -49,6 +52,7 @@ public class DomainComponent {
         return getMovieTrailerUseCase;
     }
 
+    @Override
     @NonNull
     public GetMovieByIdUseCase provideGetMovieByIdUseCase() {
         if (getMovieByIdUseCase == null) {

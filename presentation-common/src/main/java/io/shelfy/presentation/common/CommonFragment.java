@@ -11,12 +11,12 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Objects;
 
-import io.shelfy.presentation.common.component.CommonActivityComponent;
-import io.shelfy.presentation.common.component.PresentationComponent;
+import io.shelfy.presentation.common.component.ActivityModuleImpl;
+import io.shelfy.presentation.common.component.PresentationModule;
 
 public abstract class CommonFragment extends Fragment {
 
-    protected PresentationComponent fragmentComponent;
+    protected PresentationModule fragmentComponent;
 
     public CommonFragment() {
     }
@@ -30,11 +30,11 @@ public abstract class CommonFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final CommonActivity commonActivity = (CommonActivity) requireActivity();
-        fragmentComponent = createFragmentComponent(commonActivity.activityComponent);
+        fragmentComponent = createFragmentModule(commonActivity.activityComponent);
     }
 
     @NonNull
-    protected abstract PresentationComponent createFragmentComponent(@NonNull CommonActivityComponent activityComponent);
+    protected abstract PresentationModule createFragmentModule(@NonNull ActivityModuleImpl activityComponent);
 
     @Nullable
     public final <T extends View> T findViewById(@IdRes int id) {

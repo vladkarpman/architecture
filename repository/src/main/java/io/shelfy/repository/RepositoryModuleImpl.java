@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import io.shelfy.domain.Repository;
 
-public class RepositoryComponent {
+public class RepositoryModuleImpl implements RepositoryModule {
 
     private Repository repository;
 
@@ -14,8 +14,8 @@ public class RepositoryComponent {
     @NonNull
     private final RemoteDataSource remoteDataSource;
 
-    public RepositoryComponent(@NonNull LocalDataSource localDataSource,
-                               @NonNull RemoteDataSource remoteDataSource) {
+    public RepositoryModuleImpl(@NonNull LocalDataSource localDataSource,
+                                @NonNull RemoteDataSource remoteDataSource) {
         this.localDataSource = localDataSource;
         this.remoteDataSource = remoteDataSource;
     }
