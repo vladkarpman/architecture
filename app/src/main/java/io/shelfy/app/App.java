@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.core.util.Supplier;
 
+import io.reactivex.annotations.NonNull;
 import io.shelfy.domain.CommonApplication;
 import io.shelfy.domain.DomainModule;
 import io.shelfy.domain.DomainModuleImpl;
@@ -18,6 +19,7 @@ public class App extends Application implements CommonApplication {
 
     private DomainModule domainModule;
 
+    @NonNull
     @Override
     public DomainModule getDomainModule() {
         if (domainModule == null) {
