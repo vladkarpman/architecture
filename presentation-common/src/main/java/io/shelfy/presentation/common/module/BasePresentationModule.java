@@ -10,9 +10,10 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import io.shelfy.presentation.common.view.CommonView;
 import io.shelfy.presentation.common.view.DummyView;
 import io.shelfy.presentation.common.view.factory.ViewFactory;
+import io.shelfy.presentation.common.viewmodel.CommonViewModel;
 import io.shelfy.presentation.common.viewmodel.DummyViewModel;
 
-public class PresentationModuleImpl implements PresentationModule {
+public class BasePresentationModule implements PresentationModule {
 
     @NonNull
     protected final LifecycleOwner lifecycleOwner;
@@ -28,7 +29,7 @@ public class PresentationModuleImpl implements PresentationModule {
     @NonNull
     final ViewFactory viewFactory;
 
-    public PresentationModuleImpl(
+    public BasePresentationModule(
             @NonNull LifecycleOwner lifecycleOwner,
             @NonNull ViewModelStoreOwner storeOwner,
             @NonNull ViewModelProvider.Factory viewModelFactory,
@@ -51,22 +52,17 @@ public class PresentationModuleImpl implements PresentationModule {
 
     @Override
     @NonNull
-    public <VM extends ViewModel> VM provideViewModel(@NonNull Class<VM> viewModelClass) {
-        try {
-            return provideViewModelProvider().get(viewModelClass);
-        } catch (Exception e) {
-            return (VM) new DummyViewModel();
+    public <VM extends ViewModel & CommonViewModel> VM provideViewModel(@NonNull Class<VM> viewModelClass) {
+        if (!viewModelClass.isInstance(ViewModel.class)) {
+            throw new IllegalStateException("View Model should be extended from ViewModel class");
         }
+        return provideViewModelProvider().get(viewModelClass);
     }
 
     @Override
     @NonNull
     public <V extends CommonView> V provideView(@NonNull Class<V> viewClass) {
-        try {
-            return viewFactory.create(viewClass);
-        } catch (Exception e) {
-            return (V) new DummyView();
-        }
+        return viewFactory.create(viewClass);
     }
 
     @NonNull

@@ -1,5 +1,6 @@
 package io.shelfy.presentation.common;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
@@ -11,12 +12,12 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Objects;
 
-import io.shelfy.presentation.common.module.ActivityModule;
-import io.shelfy.presentation.common.module.FragmentModule;
+import io.shelfy.presentation.common.component.ActivityComponent;
+import io.shelfy.presentation.common.component.FragmentComponent;
 
 public abstract class CommonFragment extends Fragment {
 
-    protected FragmentModule fragmentComponent;
+    protected FragmentComponent fragmentComponent;
 
     public CommonFragment() {
     }
@@ -25,16 +26,22 @@ public abstract class CommonFragment extends Fragment {
         super(contentLayoutId);
     }
 
-    @CallSuper
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
         final CommonActivity commonActivity = (CommonActivity) requireActivity();
-        fragmentComponent = createFragmentModule(commonActivity.activityComponent);
+        fragmentComponent = createFragmentComponent(commonActivity.activityComponent);
     }
 
     @NonNull
-    protected abstract FragmentModule createFragmentModule(@NonNull ActivityModule activityComponent);
+    protected abstract FragmentComponent createFragmentComponent(@NonNull ActivityComponent activityComponent);
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        fragmentComponent.destroy();
+        fragmentComponent = null;
+    }
 
     @Nullable
     public final <T extends View> T findViewById(@IdRes int id) {

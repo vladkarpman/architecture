@@ -2,20 +2,23 @@ package io.shelfy.presentation;
 
 import androidx.annotation.NonNull;
 
-import io.shelfy.domain.DomainModule;
+import io.shelfy.presentation.common.component.ApplicationComponent;
 import io.shelfy.presentation.common.CommonActivity;
-import io.shelfy.presentation.common.module.ActivityModule;
-import io.shelfy.presentation.common.module.ActivityModuleImpl;
+import io.shelfy.presentation.common.component.ActivityComponent;
+import io.shelfy.presentation.common.component.BaseActivityComponent;
+import io.shelfy.presentation.common.module.BasePresentationModule;
 
 public class BaseActivity extends CommonActivity {
 
     @NonNull
     @Override
-    protected ActivityModule createActivityModule(@NonNull DomainModule domainModule) {
-        return new ActivityModuleImpl(domainModule,
-                this,
-                this,
-                new ViewModelFactory(domainModule),
-                new ViewFactoryImpl());
+    protected ActivityComponent createActivityComponent(@NonNull ApplicationComponent applicationComponent) {
+        return new BaseActivityComponent(
+                applicationComponent,
+                new BasePresentationModule(
+                        this,
+                        this,
+                        new ViewModelFactory(applicationComponent.getDomainModule()),
+                        new ViewFactoryImpl()));
     }
 }

@@ -6,30 +6,34 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.util.Supplier;
 
-import io.shelfy.domain.CommonApplication;
-import io.shelfy.domain.DomainModule;
-import io.shelfy.presentation.common.module.ActivityModule;
-import io.shelfy.presentation.common.module.ActivityModuleImpl;
+import io.shelfy.presentation.common.component.ActivityComponent;
+import io.shelfy.presentation.common.component.ApplicationComponent;
 
 public abstract class CommonActivity extends AppCompatActivity {
 
-    protected ActivityModule activityComponent;
+    protected ActivityComponent activityComponent;
 
     @Override
     @CallSuper
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DomainModule domainModule;
+        final ApplicationComponent applicationComponent;
         try {
-            domainModule = ((CommonApplication) getApplication()).getDomainModule();
-        } catch (ClassCastException e) {
-            throw new IllegalStateException("Application class must provide domain component!");
+            applicationComponent = ((CommonApplication) getApplication()).getApplicationComponent();
+        } catch (Exception e) {
+            throw new IllegalStateException("Application must return Application Component");
         }
-        activityComponent = createActivityModule(domainModule);
+        activityComponent = createActivityComponent(applicationComponent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        activityComponent.destroy();
+        activityComponent = null;
     }
 
     @NonNull
-    protected abstract ActivityModule createActivityModule(@NonNull DomainModule domainModule);
+    protected abstract ActivityComponent createActivityComponent(@NonNull ApplicationComponent applicationComponent);
 }

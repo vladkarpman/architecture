@@ -3,11 +3,10 @@ package io.shelfy.presentation;
 import androidx.annotation.NonNull;
 
 import io.shelfy.presentation.common.CommonFragment;
-import io.shelfy.presentation.common.module.ActivityModule;
-import io.shelfy.presentation.common.module.ActivityModuleImpl;
-import io.shelfy.presentation.common.module.FragmentModule;
-import io.shelfy.presentation.common.module.FragmentModuleImpl;
-import io.shelfy.presentation.common.module.PresentationModule;
+import io.shelfy.presentation.common.component.ActivityComponent;
+import io.shelfy.presentation.common.component.FragmentComponent;
+import io.shelfy.presentation.common.component.BaseFragmentComponent;
+import io.shelfy.presentation.common.module.BasePresentationModule;
 
 public class BaseFragment extends CommonFragment {
 
@@ -20,7 +19,13 @@ public class BaseFragment extends CommonFragment {
 
     @NonNull
     @Override
-    protected FragmentModule createFragmentModule(@NonNull ActivityModule activityComponent) {
-        return new FragmentModuleImpl(activityComponent, this, this);
+    protected FragmentComponent createFragmentComponent(@NonNull ActivityComponent activityComponent) {
+        return new BaseFragmentComponent(
+                activityComponent,
+                new BasePresentationModule(
+                        this,
+                        this,
+                        new ViewModelFactory(activityComponent.getApplicationComponent().getDomainModule()),
+                        new ViewFactoryImpl()));
     }
 }
