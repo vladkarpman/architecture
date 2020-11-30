@@ -11,33 +11,25 @@ import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmModel;
 import io.realm.RealmResults;
 import io.shelfy.domain.entity.Movie;
 import io.shelfy.domain.entity.MovieVideo;
+import io.shelfy.realmdb.common.RealmDao;
 import io.shelfy.realmdb.model.MovieRealm;
 import io.shelfy.realmdb.model.MovieVideoRealm;
 import io.shelfy.repository.datasource.local.LocalDataSource;
+import io.shelfy.utils.Mapper;
 
-class RealmDB implements LocalDataSource {
-
-    @NonNull
-    private final RealmConfiguration realmConfiguration;
+class RealmDB extends RealmDao implements LocalDataSource {
 
     public RealmDB(@NonNull RealmConfiguration realmConfiguration) {
-        this.realmConfiguration = realmConfiguration;
+        super(realmConfiguration);
     }
 
     @Override
     public Completable saveMovies(List<Movie> movies) {
-        return Observable.fromIterable(movies)
-                .subscribeOn(Schedulers.io())
-                .map(this::map)
-                .toList()
-                .flatMapCompletable(moviesRealm -> Completable.fromAction(() -> {
-                    try (Realm realm = Realm.getInstance(realmConfiguration)) {
-                        realm.executeTransaction(db -> db.insertOrUpdate(moviesRealm));
-                    }
-                }));
+        return update(movies, (Mapper<Movie, MovieRealm>) this::map);
     }
 
     @Override
@@ -58,20 +50,7 @@ class RealmDB implements LocalDataSource {
 
     @Override
     public Single<List<Movie>> getMovies() {
-        return Single.<List<Movie>>create(
-                emitter -> {
-                    try (Realm realm = Realm.getInstance(realmConfiguration)) {
-                        final RealmResults<MovieRealm> movieRealms = realm.where(MovieRealm.class).findAll();
-                        final List<Movie> movies = Observable.fromIterable(movieRealms)
-                                .map(this::map)
-                                .toList()
-                                .blockingGet();
-                        emitter.onSuccess(movies);
-                    } catch (Exception e) {
-                        emitter.onError(e);
-                    }
-                })
-                .subscribeOn(Schedulers.io());
+        return read(MovieRealm.class, this::map);
     }
 
     @Override

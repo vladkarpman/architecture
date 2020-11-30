@@ -17,8 +17,10 @@
             <option value="$PROJECT_DIR$/presentation" />
             <option value="$PROJECT_DIR$/presentation-common" />
             <option value="$PROJECT_DIR$/realmdb" />
+            <option value="$PROJECT_DIR$/realmdb-common" />
             <option value="$PROJECT_DIR$/repository" />
             <option value="$PROJECT_DIR$/restapi" />
+            <option value="$PROJECT_DIR$/utils" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

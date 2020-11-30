@@ -2,8 +2,11 @@ package io.shelfy.utils;
 
 import androidx.annotation.NonNull;
 
+/**
+ * interface for mapper/factory/converter
+ */
 public interface Mapper<From, To> {
 
     @NonNull
-    To map(@NonNull From from);
+    To map(From from);
 }
