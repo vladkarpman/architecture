@@ -1,21 +1,25 @@
 package io.shelfy.realmdb.common;
 
 
+import android.os.HandlerThread;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.internal.functions.Functions;
 import io.reactivex.schedulers.Schedulers;
-import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmModel;
-import io.realm.RealmResults;
 import io.shelfy.utils.Mapper;
 
 import static io.shelfy.realmdb.common.RealmUtils.executeAsync;
@@ -31,15 +35,11 @@ public class RealmDao {
     }
 
     public <T extends RealmModel, E> Single<List<E>> read(@NonNull Class<T> clazz, @NonNull Mapper<T, E> mapper) {
-        return read(clazz)
-                .subscribeOn(Schedulers.computation())
-                .flattenAsObservable(Functions.identity())
-                .map(mapper::map)
-                .toList();
-    }
-
-    protected <T extends RealmModel> Single<RealmResults<T>> read(@NonNull Class<T> clazz) {
-        return fetchAsync(realmConfiguration, realm -> realm.where(clazz).findAll());
+        return fetchAsync(realmConfiguration, realm ->
+                Observable.fromIterable(realm.where(clazz).findAll())
+                        .map(mapper::map)
+                        .toList()
+                        .blockingGet());
     }
 
     public <T extends RealmModel> Completable create(Collection<T> objects) {
@@ -48,7 +48,6 @@ public class RealmDao {
 
     public <E, T extends RealmModel> Completable create(Collection<E> objects, @NonNull Mapper<E, T> mapper) {
         return Observable.fromIterable(objects)
-                .subscribeOn(Schedulers.computation())
                 .map(mapper::map)
                 .toList()
                 .flatMapCompletable(this::create);
@@ -69,7 +68,6 @@ public class RealmDao {
     public <From, To extends RealmModel> Completable update(@NonNull Collection<From> objects,
                                                             @NonNull Mapper<From, To> mapper) {
         return Observable.fromIterable(objects)
-                .subscribeOn(Schedulers.computation())
                 .map(mapper::map)
                 .toList()
                 .flatMapCompletable(this::update);
