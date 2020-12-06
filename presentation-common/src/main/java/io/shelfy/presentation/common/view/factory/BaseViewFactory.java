@@ -34,7 +34,7 @@ public abstract class BaseViewFactory implements ViewFactory {
     }
 
     @Override
-    public <T extends CommonView> void clear(@io.reactivex.annotations.NonNull Class<T> viewClass) {
+    public <T extends CommonView> void clear(@NonNull Class<T> viewClass) {
         final CommonView view = viewsStore.get(viewClass);
         if (view != null) {
             view.onDestroy();

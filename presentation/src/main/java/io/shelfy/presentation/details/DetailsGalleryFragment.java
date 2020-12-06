@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import io.shelfy.domain.entity.Movie;
 import io.shelfy.presentation.BaseFragment;
 import io.shelfy.presentation.R;
 import io.shelfy.presentation.common.CommonFragment;
@@ -18,6 +19,7 @@ import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
 public class DetailsGalleryFragment extends BaseFragment {
 
     private static final String ARGS_MOVIE_POSITION = "ARGS_MOVIE_POSITION";
+    private static final String ARGS_MOVIE_ID = "ARGS_MOVIE_ID";
 
     private MoviesViewModel viewModel;
     private ViewPager moviesPager;
@@ -27,10 +29,10 @@ public class DetailsGalleryFragment extends BaseFragment {
         super(R.layout.fragment_movies_gallery);
     }
 
-    public static DetailsGalleryFragment newInstance(int position) {
+    public static DetailsGalleryFragment newInstance(Movie movie) {
         DetailsGalleryFragment galleryFragment = new DetailsGalleryFragment();
         final Bundle arguments = new Bundle();
-        arguments.putInt(ARGS_MOVIE_POSITION, position);
+        arguments.putInt(ARGS_MOVIE_ID, movie.getId());
         galleryFragment.setArguments(arguments);
         return galleryFragment;
     }

@@ -22,7 +22,7 @@ public class ViewFactoryImpl extends BaseViewFactory {
 
     @Override
     protected <T extends CommonView> T createInternal(@NonNull Class<T> viewClass, @Nullable ViewGroup container) {
-        if (viewClass.isInstance(MoviesView.class)) {
+        if (viewClass.isAssignableFrom(MoviesView.class)) {
             return (T) new MoviesViewImpl(layoutInflater, container);
         }
         return null;

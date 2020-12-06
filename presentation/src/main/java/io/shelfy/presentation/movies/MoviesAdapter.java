@@ -19,12 +19,12 @@ import io.shelfy.presentation.details.view.MovieViewHolder;
 public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
     @NonNull
-    private final Consumer<Integer> clickListener;
+    private final Consumer<Movie> clickListener;
 
     @NonNull
     private List<Movie> movies = new ArrayList<>();
 
-    public MoviesAdapter(@NonNull Consumer<Integer> clickListener) {
+    public MoviesAdapter(@NonNull Consumer<Movie> clickListener) {
         this.clickListener = clickListener;
     }
 
@@ -37,8 +37,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        holder.bind(movies.get(position));
-        holder.itemView.setOnClickListener(view -> clickListener.accept(position));
+        final Movie movie = movies.get(position);
+        holder.bind(movie);
+        holder.itemView.setOnClickListener(view -> clickListener.accept(movie));
     }
 
     @UiThread

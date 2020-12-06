@@ -4,35 +4,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.ContentLoadingProgressBar;
-import androidx.recyclerview.widget.RecyclerView;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.shelfy.domain.entity.Movie;
 import io.shelfy.presentation.BaseFragment;
 import io.shelfy.presentation.R;
 import io.shelfy.presentation.details.DetailsGalleryFragment;
 import io.shelfy.presentation.movies.view.MoviesView;
-import io.shelfy.presentation.movies.view.MoviesViewImpl;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
 
 public class MoviesFragment extends BaseFragment {
 
-    private MoviesAdapter moviesAdapter;
-
-    private MoviesViewModel viewModel;
-
-    private RecyclerView moviesRecyclerView;
-    private ContentLoadingProgressBar progress;
+    private MoviesViewModel moviesViewModel;
     private MoviesView moviesView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        viewModel = fragmentComponent.getPresentationModule().provideViewModel(MoviesViewModel.class);
+        moviesViewModel = fragmentComponent.getPresentationModule().provideViewModel(MoviesViewModel.class);
     }
 
     @Nullable
@@ -48,27 +41,34 @@ public class MoviesFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        moviesRecyclerView = findViewById(R.id.recycler);
-        progress = findViewById(R.id.progress);
+        moviesView.showProgress();
 
-        moviesAdapter = new MoviesAdapter(this::showDetailsFragment);
-        moviesRecyclerView.setAdapter(moviesAdapter);
-
-        showProgress();
-        initViewModelObservers();
-    }
-
-    private void initViewModelObservers() {
-        viewModel.getMovies().observe(getViewLifecycleOwner(), movies -> {
-            hideProgress();
-            moviesAdapter.setMovies(movies);
+        moviesViewModel.getMovies().observe(getViewLifecycleOwner(), movies -> {
+            moviesView.hideProgress();
+            moviesView.showMovies(movies);
         });
 
-        viewModel.getErrorMessages().observe(getViewLifecycleOwner(), message -> {
-            Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+        moviesViewModel.getErrorMessages().observe(getViewLifecycleOwner(), message -> {
+            moviesView.showError(message);
         });
+
+        onDestroyDisposables.add(moviesView.onMovieClicked()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::showDetailsFragment));
     }
 
+    // TODO: 12/6/20 delegate this method to router
+    private void showDetailsFragment(Movie movie) {
+        DetailsGalleryFragment detailsFragment = DetailsGalleryFragment.newInstance(movie);
+        getParentFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .add(R.id.container, detailsFragment)
+                .commit();
+    }
+
+
+    // TODO: 12/6/20 implement search
 //    @Override
 //    public boolean onCreateOptionsMenu(@Nullable Menu menu) {
 //        if (menu != null) {
@@ -94,26 +94,7 @@ public class MoviesFragment extends BaseFragment {
 //        return super.onCreateOptionsMenu(menu);
 //    }
 
-    private void showProgress() {
-        progress.show();
-        moviesRecyclerView.setVisibility(View.GONE);
-    }
-
-    private void hideProgress() {
-        progress.hide();
-        moviesRecyclerView.setVisibility(View.VISIBLE);
-    }
-
     private void showMoviesStartWith(String query) {
-        viewModel.search(query);
-    }
-
-    private void showDetailsFragment(int selectedItemPosition) {
-        DetailsGalleryFragment detailsFragment = DetailsGalleryFragment.newInstance(selectedItemPosition);
-        getParentFragmentManager()
-                .beginTransaction()
-                .addToBackStack(null)
-                .add(R.id.container, detailsFragment)
-                .commit();
+        moviesViewModel.search(query);
     }
 }
