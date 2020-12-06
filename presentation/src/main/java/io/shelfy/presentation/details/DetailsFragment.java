@@ -9,12 +9,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 import androidx.lifecycle.LiveDataReactiveStreams;
 
 import com.bumptech.glide.Glide;
 
 import java.util.Objects;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.shelfy.domain.entity.MovieVideo;
 import io.shelfy.presentation.BaseFragment;
 import io.shelfy.presentation.R;
 import io.shelfy.domain.entity.Movie;
@@ -62,32 +65,31 @@ public class DetailsFragment extends BaseFragment {
 
         viewModel = fragmentComponent.getPresentationModule().provideViewModel(MovieDetailsViewModel.class);
 
-        initViewModelObservers();
+        onDestroyDisposables.add(viewModel.getMovie(movieId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(movie -> {
+                    Glide.with(ivBackground)
+                            .load(movie.getBackdropUrl())
+                            .into(ivBackground);
+                    Glide.with(ivPoster)
+                            .load(movie.getPosterUrl())
+                            .into(ivPoster);
+                    tvTitle.setText(movie.getTitle());
+                    tvReleaseDate.setText(movie.getReleaseDate());
+                    tvOverview.setText(movie.getDescription());
+                }));
 
         btnTrailer.setOnClickListener(v -> {
-            LiveDataReactiveStreams.fromPublisher(viewModel.loadTrailer(movieId).toFlowable())
-                    .observe(
-                            getViewLifecycleOwner(),
-                            movieVideo -> openMovieTrailer(movieVideo.getVideoUrl()));
+            onDestroyDisposables.add(viewModel.loadTrailer(movieId)
+                    .map(MovieVideo::getVideoUrl)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::openMovieTrailer));
         });
     }
 
+    @UiThread
     private void openMovieTrailer(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
-    }
-
-    private void initViewModelObservers() {
-        viewModel.getMovie(movieId).observe(getViewLifecycleOwner(), movie -> {
-            Glide.with(ivBackground)
-                    .load(movie.getBackdropUrl())
-                    .into(ivBackground);
-            Glide.with(ivPoster)
-                    .load(movie.getPosterUrl())
-                    .into(ivPoster);
-            tvTitle.setText(movie.getTitle());
-            tvReleaseDate.setText(movie.getReleaseDate());
-            tvOverview.setText(movie.getDescription());
-        });
     }
 }

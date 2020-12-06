@@ -12,10 +12,13 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Objects;
 
+import io.reactivex.disposables.CompositeDisposable;
 import io.shelfy.presentation.common.component.ActivityComponent;
 import io.shelfy.presentation.common.component.FragmentComponent;
 
 public abstract class CommonFragment extends Fragment {
+
+    protected final CompositeDisposable onDestroyDisposables = new CompositeDisposable();
 
     protected FragmentComponent fragmentComponent;
 
@@ -39,6 +42,7 @@ public abstract class CommonFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        onDestroyDisposables.clear();
         fragmentComponent.destroy();
         fragmentComponent = null;
     }

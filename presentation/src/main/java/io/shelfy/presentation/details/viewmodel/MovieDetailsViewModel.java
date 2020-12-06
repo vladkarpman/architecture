@@ -31,7 +31,7 @@ public class MovieDetailsViewModel extends BaseViewModel {
         return getMovieTrailerUseCase.getTrailer(movieId);
     }
 
-    public LiveData<Movie> getMovie(int movieId) {
-        return fromPublisher(getMovieByIdUseCase.getMovie(movieId).toFlowable());
+    public Maybe<Movie> getMovie(int movieId) {
+        return getMovieByIdUseCase.getMovie(movieId);
     }
 }
