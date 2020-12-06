@@ -14,6 +14,7 @@ import io.shelfy.restapi.RestApiModule;
 public class App extends CommonApplication {
 
     @NonNull
+    @Override
     public ApplicationComponent createApplicationComponent() {
         final RemoteDataSource remoteDataSource = new RestApiModule().provideRemoteDataSource();
         final LocalDataSource localDataSource = new RealmDBModule(this).provideLocalDataSource();
