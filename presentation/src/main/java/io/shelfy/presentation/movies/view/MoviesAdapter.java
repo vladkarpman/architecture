@@ -1,4 +1,4 @@
-package io.shelfy.presentation.movies;
+package io.shelfy.presentation.movies.view;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +16,7 @@ import io.shelfy.presentation.R;
 import io.shelfy.domain.entity.Movie;
 import io.shelfy.presentation.details.view.MovieViewHolder;
 
-public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
+class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
     @NonNull
     private final Consumer<Movie> clickListener;

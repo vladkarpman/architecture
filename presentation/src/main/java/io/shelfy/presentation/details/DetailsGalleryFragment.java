@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
+import java.util.Collections;
+import java.util.Observable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.shelfy.domain.entity.Movie;
@@ -46,15 +48,30 @@ public class DetailsGalleryFragment extends BaseFragment {
         moviesPager.setAdapter(detailsFragmentAdapter);
 
         final AtomicInteger currentPosition = new AtomicInteger();
+        final AtomicInteger movieId = new AtomicInteger();
         final Bundle arguments = savedInstanceState != null ? savedInstanceState : getArguments();
         if (arguments != null) {
+            movieId.set(arguments.getInt(ARGS_MOVIE_ID));
             currentPosition.set(arguments.getInt(ARGS_MOVIE_POSITION));
         }
 
         viewModel = fragmentComponent.getPresentationModule().provideViewModel(MoviesViewModel.class);
         viewModel.getMovies().observe(getViewLifecycleOwner(), movies -> {
             detailsFragmentAdapter.setData(movies);
-            int currentItem = currentPosition.get();
+            int currentItem = -1;
+            int currentMovieId = movieId.get();
+            if (currentMovieId != -1) {
+                int index = 0;
+                for (Movie movie : movies) {
+                    if (movie.getId() == currentMovieId) {
+                        currentItem = index;
+                        break;
+                    }
+                    index++;
+                }
+            } else {
+                currentItem = currentPosition.get();
+            }
             if (currentItem != -1) {
                 moviesPager.setCurrentItem(currentItem, false);
             }

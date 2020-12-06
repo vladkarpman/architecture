@@ -17,7 +17,6 @@ import io.reactivex.subjects.PublishSubject;
 import io.shelfy.domain.entity.Movie;
 import io.shelfy.presentation.R;
 import io.shelfy.presentation.common.view.BaseView;
-import io.shelfy.presentation.movies.MoviesAdapter;
 
 public class MoviesViewImpl extends BaseView implements MoviesView {
 
