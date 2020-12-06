@@ -32,7 +32,7 @@ public class MoviesFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        viewModel = fragmentComponent.provideViewModel(MoviesViewModel.class);
+        viewModel = fragmentComponent.getPresentationModule().provideViewModel(MoviesViewModel.class);
     }
 
     @Override

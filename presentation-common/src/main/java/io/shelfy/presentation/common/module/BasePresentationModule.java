@@ -53,9 +53,6 @@ public class BasePresentationModule implements PresentationModule {
     @Override
     @NonNull
     public <VM extends ViewModel & CommonViewModel> VM provideViewModel(@NonNull Class<VM> viewModelClass) {
-        if (!viewModelClass.isInstance(ViewModel.class)) {
-            throw new IllegalStateException("View Model should be extended from ViewModel class");
-        }
         return provideViewModelProvider().get(viewModelClass);
     }
 

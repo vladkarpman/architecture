@@ -60,7 +60,7 @@ public class DetailsFragment extends BaseFragment {
         tvOverview = view.findViewById(R.id.tvOverview);
         btnTrailer = view.findViewById(R.id.btnTrailer);
 
-        viewModel = fragmentComponent.provideViewModel(MovieDetailsViewModel.class);
+        viewModel = fragmentComponent.getPresentationModule().provideViewModel(MovieDetailsViewModel.class);
 
         initViewModelObservers();
 

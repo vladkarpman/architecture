@@ -13,8 +13,9 @@ import io.reactivex.disposables.Disposables;
 import io.shelfy.domain.entity.Movie;
 import io.shelfy.domain.usecase.getmoviesbyquery.GetMoviesByQueryUseCase;
 import io.shelfy.domain.usecase.getmovies.GetPopularMoviesUseCase;
+import io.shelfy.presentation.common.viewmodel.BaseViewModel;
 
-public class MoviesViewModel extends ViewModel {
+public class MoviesViewModel extends BaseViewModel {
 
     @NonNull
     private final GetPopularMoviesUseCase getPopularMoviesUseCase;
@@ -25,8 +26,6 @@ public class MoviesViewModel extends ViewModel {
     private final MutableLiveData<List<Movie>> moviesLiveData = new MutableLiveData<>();
 
     private final MutableLiveData<String> errorLiveData = new MutableLiveData<>();
-
-    private final CompositeDisposable onClearDisposable = new CompositeDisposable();
 
     private Disposable searchDisposable = Disposables.disposed();
 
@@ -47,22 +46,16 @@ public class MoviesViewModel extends ViewModel {
     }
 
     public void loadPopularMovies() {
-        onClearDisposable.add(getPopularMoviesUseCase.getMovies()
+        onDestroyDisposables.add(getPopularMoviesUseCase.getMovies()
                 .subscribe(moviesLiveData::postValue, error -> errorLiveData.postValue(error.getMessage())));
     }
 
     public void search(@NonNull String query) {
-        onClearDisposable.remove(searchDisposable);
+        onDestroyDisposables.remove(searchDisposable);
         searchDisposable = getMoviesByQueryUseCase.getMovies(query)
                 .subscribe(moviesLiveData::postValue, error -> {
                     errorLiveData.postValue(error.getMessage());
                 });
-        onClearDisposable.add(searchDisposable);
-    }
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        onClearDisposable.clear();
+        onDestroyDisposables.add(searchDisposable);
     }
 }

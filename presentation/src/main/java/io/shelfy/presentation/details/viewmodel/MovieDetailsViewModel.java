@@ -9,10 +9,11 @@ import io.shelfy.domain.entity.Movie;
 import io.shelfy.domain.entity.MovieVideo;
 import io.shelfy.domain.usecase.getmoviebyid.GetMovieByIdUseCase;
 import io.shelfy.domain.usecase.getmovietrailer.GetMovieTrailerUseCase;
+import io.shelfy.presentation.common.viewmodel.BaseViewModel;
 
 import static androidx.lifecycle.LiveDataReactiveStreams.fromPublisher;
 
-public class MovieDetailsViewModel extends ViewModel {
+public class MovieDetailsViewModel extends BaseViewModel {
 
     @NonNull
     private final GetMovieTrailerUseCase getMovieTrailerUseCase;

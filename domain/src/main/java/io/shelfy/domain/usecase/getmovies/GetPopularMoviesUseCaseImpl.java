@@ -1,10 +1,10 @@
 package io.shelfy.domain.usecase.getmovies;
 
-import androidx.annotation.NonNull;
 
 import java.util.List;
 
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 import io.shelfy.domain.repository.Repository;
 import io.shelfy.domain.entity.Movie;
 

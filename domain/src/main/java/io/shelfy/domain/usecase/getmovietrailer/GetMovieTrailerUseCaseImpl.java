@@ -1,8 +1,8 @@
 package io.shelfy.domain.usecase.getmovietrailer;
 
-import androidx.annotation.NonNull;
 
 import io.reactivex.Maybe;
+import io.reactivex.annotations.NonNull;
 import io.shelfy.domain.repository.Repository;
 import io.shelfy.domain.entity.MovieVideo;
 
