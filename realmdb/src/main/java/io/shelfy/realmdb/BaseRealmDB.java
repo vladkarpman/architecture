@@ -1,8 +1,6 @@
 package io.shelfy.realmdb;
 
 
-import android.os.HandlerThread;
-
 import androidx.arch.core.util.Function;
 import androidx.core.util.Consumer;
 import androidx.core.util.Supplier;
@@ -15,7 +13,6 @@ import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
@@ -69,18 +66,21 @@ class BaseRealmDB {
     }
 
     public <T extends RealmModel> Completable create(Collection<T> objects) {
-        return executeAsync(realmConfiguration, realm -> realm.insert(objects));
+        return executeAsync(realmConfiguration, realm -> realm.insert(objects))
+                .subscribeOn(realmScheduler());
     }
 
     public <E, T extends RealmModel> Completable create(Collection<E> objects, @NonNull Mapper<E, T> mapper) {
         return Observable.fromIterable(objects)
                 .map(mapper::map)
                 .toList()
-                .flatMapCompletable(this::create);
+                .flatMapCompletable(this::create)
+                .subscribeOn(realmScheduler());
     }
 
     public Completable execute(@NonNull Consumer<Realm> executeFunction) {
-        return executeAsync(realmConfiguration, executeFunction::accept);
+        return executeAsync(realmConfiguration, executeFunction::accept)
+                .subscribeOn(realmScheduler());
     }
 
     public <T extends RealmModel> Completable update(
@@ -93,15 +93,18 @@ class BaseRealmDB {
     }
 
     public <T extends RealmModel> Completable update(T object) {
-        return executeAsync(realmConfiguration, realm -> realm.insertOrUpdate(Collections.singleton(object)));
+        return executeAsync(realmConfiguration, realm -> realm.insertOrUpdate(Collections.singleton(object)))
+                .subscribeOn(realmScheduler());
     }
 
     public <T extends RealmModel, E> Completable update(E object, @NonNull Mapper<E, T> mapper) {
-        return update(Collections.singleton(mapper.map(object)));
+        return update(Collections.singleton(mapper.map(object)))
+                .subscribeOn(realmScheduler());
     }
 
     public <T extends RealmModel> Completable update(@NonNull Collection<T> objects) {
-        return executeAsync(realmConfiguration, realm -> realm.insertOrUpdate(objects));
+        return executeAsync(realmConfiguration, realm -> realm.insertOrUpdate(objects))
+                .subscribeOn(realmScheduler());
     }
 
     public <From, To extends RealmModel> Completable update(@NonNull Collection<From> objects,
