@@ -1,6 +1,9 @@
 package io.shelfy.presentation.common.module;
 
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModel;
@@ -8,10 +11,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import io.shelfy.presentation.common.view.CommonView;
-import io.shelfy.presentation.common.view.DummyView;
 import io.shelfy.presentation.common.view.factory.ViewFactory;
 import io.shelfy.presentation.common.viewmodel.CommonViewModel;
-import io.shelfy.presentation.common.viewmodel.DummyViewModel;
 
 public class BasePresentationModule implements PresentationModule {
 
@@ -58,8 +59,8 @@ public class BasePresentationModule implements PresentationModule {
 
     @Override
     @NonNull
-    public <V extends CommonView> V provideView(@NonNull Class<V> viewClass) {
-        return viewFactory.create(viewClass);
+    public <V extends CommonView> V provideView(@NonNull Class<V> viewClass, @Nullable ViewGroup container) {
+        return viewFactory.create(viewClass, container);
     }
 
     @NonNull

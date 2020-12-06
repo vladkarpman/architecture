@@ -1,7 +1,9 @@
 package io.shelfy.presentation.movies;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import io.shelfy.presentation.BaseFragment;
 import io.shelfy.presentation.R;
-import io.shelfy.presentation.common.CommonFragment;
 import io.shelfy.presentation.details.DetailsGalleryFragment;
+import io.shelfy.presentation.movies.view.MoviesView;
+import io.shelfy.presentation.movies.view.MoviesViewImpl;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
 
 public class MoviesFragment extends BaseFragment {
@@ -23,10 +26,7 @@ public class MoviesFragment extends BaseFragment {
 
     private RecyclerView moviesRecyclerView;
     private ContentLoadingProgressBar progress;
-
-    public MoviesFragment() {
-        super(R.layout.fragment_movies_list);
-    }
+    private MoviesView moviesView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,10 +35,18 @@ public class MoviesFragment extends BaseFragment {
         viewModel = fragmentComponent.getPresentationModule().provideViewModel(MoviesViewModel.class);
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        moviesView = fragmentComponent.getPresentationModule().provideView(MoviesView.class, container);
+        return moviesView.getRootView();
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
         moviesRecyclerView = findViewById(R.id.recycler);
         progress = findViewById(R.id.progress);

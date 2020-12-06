@@ -26,6 +26,6 @@ public class BaseFragment extends CommonFragment {
                         this,
                         this,
                         new ViewModelFactory(activityComponent.getApplicationComponent().getDomainModule()),
-                        new ViewFactoryImpl()));
+                        new ViewFactoryImpl(getLayoutInflater())));
     }
 }

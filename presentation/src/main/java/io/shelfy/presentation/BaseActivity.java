@@ -19,6 +19,6 @@ public class BaseActivity extends CommonActivity {
                         this,
                         this,
                         new ViewModelFactory(applicationComponent.getDomainModule()),
-                        new ViewFactoryImpl()));
+                        new ViewFactoryImpl(getLayoutInflater())));
     }
 }

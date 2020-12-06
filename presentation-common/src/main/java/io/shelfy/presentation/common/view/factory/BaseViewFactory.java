@@ -1,6 +1,9 @@
 package io.shelfy.presentation.common.view.factory;
 
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,17 +16,17 @@ public abstract class BaseViewFactory implements ViewFactory {
 
     @NonNull
     @Override
-    public final <T extends CommonView> T create(Class<T> viewClass) {
-        return getOrCreate(viewClass);
+    public final <T extends CommonView> T create(@NonNull Class<T> viewClass, @Nullable ViewGroup container) {
+        return getOrCreate(viewClass, container);
     }
 
-    protected abstract <T extends CommonView> T createInternal(Class<T> viewClass);
+    protected abstract <T extends CommonView> T createInternal(@NonNull Class<T> viewClass, @Nullable ViewGroup container);
 
     @NonNull
-    protected final <T extends CommonView> T getOrCreate(Class<T> viewClass) {
+    protected final <T extends CommonView> T getOrCreate(@NonNull Class<T> viewClass, @Nullable ViewGroup container) {
         final T cached = (T) viewsStore.get(viewClass);
         if (cached == null) {
-            T created = createInternal(viewClass);
+            T created = createInternal(viewClass, container);
             viewsStore.put(viewClass, created);
             return created;
         }
@@ -31,7 +34,7 @@ public abstract class BaseViewFactory implements ViewFactory {
     }
 
     @Override
-    public <T extends CommonView> void clear(Class<T> viewClass) {
+    public <T extends CommonView> void clear(@io.reactivex.annotations.NonNull Class<T> viewClass) {
         final CommonView view = viewsStore.get(viewClass);
         if (view != null) {
             view.onDestroy();
