@@ -10,14 +10,12 @@ import androidx.core.util.Supplier;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
@@ -25,6 +23,7 @@ import io.realm.RealmConfiguration;
 import io.realm.RealmModel;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import io.realm.internal.async.RealmThreadPoolExecutor;
 import io.shelfy.utils.Mapper;
 import io.shelfy.utils.Suppliers;
 
@@ -32,7 +31,7 @@ import io.shelfy.utils.Suppliers;
 class BaseRealmDB {
 
     private static final Supplier<Scheduler> REALM_SCHEDULER_SUPPLIER = Suppliers.memoize(() ->
-            Schedulers.from(Executors.newCachedThreadPool(new RealmThreadFactory("Realm Thread"))));
+            Schedulers.from(RealmThreadPoolExecutor.newDefaultExecutor()));
 
     @NonNull
     public static Scheduler realmScheduler() {
@@ -154,28 +153,5 @@ class BaseRealmDB {
                 emitter.onError(error);
             }
         }).subscribeOn(realmScheduler());
-    }
-
-    private static class RealmThreadFactory implements ThreadFactory {
-
-        private final AtomicInteger threadCount;
-
-        @NonNull
-        private final String identification;
-
-        public RealmThreadFactory(@NonNull String identification) {
-            this.identification = identification;
-            this.threadCount = new AtomicInteger();
-        }
-
-        @Override
-        public Thread newThread(Runnable r) {
-            return new HandlerThread(getName());
-        }
-
-        @NonNull
-        String getName() {
-            return identification + threadCount.getAndIncrement();
-        }
     }
 }
