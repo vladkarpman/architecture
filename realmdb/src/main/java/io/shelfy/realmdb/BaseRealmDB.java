@@ -115,7 +115,7 @@ class BaseRealmDB {
                 .flatMapCompletable(this::update);
     }
 
-    public static <T> Single<T> fetchAsync(
+    private static <T> Single<T> fetchAsync(
             @NonNull RealmConfiguration realmConfiguration,
             @NonNull io.reactivex.functions.Function<Realm, T> fetcher) {
         return Single.<T>create(emitter -> {
@@ -128,8 +128,8 @@ class BaseRealmDB {
         }).subscribeOn(realmScheduler());
     }
 
-    public static Completable executeAsync(@NonNull RealmConfiguration realmConfiguration,
-                                           @NonNull Realm.Transaction transaction) {
+    private static Completable executeAsync(@NonNull RealmConfiguration realmConfiguration,
+                                            @NonNull Realm.Transaction transaction) {
         return Completable.create(emitter -> {
             try (Realm realm = Realm.getInstance(realmConfiguration)) {
                 realm.executeTransaction(transaction);
@@ -140,7 +140,7 @@ class BaseRealmDB {
         }).subscribeOn(realmScheduler());
     }
 
-    public static <T> Single<T> executeAndFetchAsync(
+    private static <T> Single<T> executeAndFetchAsync(
             @NonNull RealmConfiguration realmConfiguration,
             @NonNull io.reactivex.functions.Function<Realm, T> fetcher) {
         return Single.<T>create(emitter -> {

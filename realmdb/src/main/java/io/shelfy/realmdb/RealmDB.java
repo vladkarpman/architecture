@@ -53,13 +53,15 @@ class RealmDB extends BaseRealmDB implements LocalDataSource {
                             .equalTo("id", movieId)
                             .findFirst();
 
-                    if (movieRealm != null) {
-                        final RealmResults<MovieVideoRealm> videoRealms = movieRealm.getMovieVideoRealms();
-                        if (videoRealms != null) {
-                            MovieVideoRealm videoRealm = videoRealms.first(null);
-                            if (videoRealm != null) {
-                                return new AtomicReference<>(map(movieId, videoRealm));
-                            }
+                    if (movieRealm == null) {
+                        return new AtomicReference<MovieVideo>();
+                    }
+
+                    final RealmResults<MovieVideoRealm> videoRealms = movieRealm.getMovieVideoRealms();
+                    if (videoRealms != null) {
+                        MovieVideoRealm videoRealm = videoRealms.first(null);
+                        if (videoRealm != null) {
+                            return new AtomicReference<>(map(movieId, videoRealm));
                         }
                     }
                     return new AtomicReference<MovieVideo>();
