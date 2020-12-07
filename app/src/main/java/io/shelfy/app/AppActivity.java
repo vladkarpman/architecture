@@ -2,9 +2,11 @@ package io.shelfy.app;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import io.shelfy.presentation.BaseActivity;
+import io.shelfy.presentation.ScreenNavigator;
 import io.shelfy.presentation.movies.MoviesFragment;
 
 public class AppActivity extends BaseActivity {
@@ -15,11 +17,13 @@ public class AppActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            // TODO: 11/27/20 implement the Router
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.container, new MoviesFragment())
-                    .commit();
+            screenNavigator.showMovies();
         }
+    }
+
+    @NonNull
+    @Override
+    public ScreenNavigator createScreenNavigator() {
+        return new ScreenNavigatorImpl(this, getSupportFragmentManager());
     }
 }

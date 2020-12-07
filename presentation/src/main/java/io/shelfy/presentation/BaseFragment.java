@@ -1,20 +1,34 @@
 package io.shelfy.presentation;
 
+import android.content.Context;
+
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 
+import io.shelfy.presentation.common.CommonActivity;
 import io.shelfy.presentation.common.CommonFragment;
 import io.shelfy.presentation.common.component.ActivityComponent;
 import io.shelfy.presentation.common.component.FragmentComponent;
 import io.shelfy.presentation.common.component.BaseFragmentComponent;
 import io.shelfy.presentation.common.module.BasePresentationModule;
 
-public class BaseFragment extends CommonFragment {
+public abstract class BaseFragment extends CommonFragment {
+
+    protected ScreenNavigator screenNavigator;
 
     public BaseFragment() {
     }
 
     public BaseFragment(int contentLayoutId) {
         super(contentLayoutId);
+    }
+
+    @Override
+    @CallSuper
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        final BaseActivity baseActivity = (BaseActivity) requireActivity();
+        screenNavigator = baseActivity.getScreenNavigator();
     }
 
     @NonNull

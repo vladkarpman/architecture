@@ -14,6 +14,7 @@ import io.shelfy.presentation.BaseFragment;
 import io.shelfy.presentation.R;
 import io.shelfy.presentation.details.DetailsGalleryFragment;
 import io.shelfy.presentation.movies.view.MoviesView;
+import io.shelfy.presentation.movies.viewcontroller.MoviesViewController;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
 
 public class MoviesFragment extends BaseFragment {
@@ -41,32 +42,12 @@ public class MoviesFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        moviesView.showProgress();
-
-        moviesViewModel.getMovies().observe(getViewLifecycleOwner(), movies -> {
-            moviesView.hideProgress();
-            moviesView.showMovies(movies);
-        });
-
-        moviesViewModel.getErrorMessages().observe(getViewLifecycleOwner(), message -> {
-            moviesView.showError(message);
-        });
-
-        onDestroyDisposables.add(moviesView.onMovieClicked()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::showDetailsFragment));
+        new MoviesViewController(
+                this,
+                moviesView,
+                moviesViewModel,
+                screenNavigator);
     }
-
-    // TODO: 12/6/20 delegate this method to router
-    private void showDetailsFragment(Movie movie) {
-        DetailsGalleryFragment detailsFragment = DetailsGalleryFragment.newInstance(movie);
-        getParentFragmentManager()
-                .beginTransaction()
-                .addToBackStack(null)
-                .add(R.id.container, detailsFragment)
-                .commit();
-    }
-
 
     // TODO: 12/6/20 implement search
 //    @Override
