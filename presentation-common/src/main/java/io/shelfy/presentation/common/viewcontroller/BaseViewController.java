@@ -69,14 +69,14 @@ public abstract class BaseViewController<V extends CommonView, VM extends Common
 
     @CallSuper
     @Override
-    public void onStop() {
-        onStopDisposables.clear();
+    public void onPause() {
+        onPauseDisposables.clear();
     }
 
     @CallSuper
     @Override
-    public void onPause() {
-        onPauseDisposables.clear();
+    public void onStop() {
+        onStopDisposables.clear();
     }
 
     @CallSuper
@@ -86,10 +86,11 @@ public abstract class BaseViewController<V extends CommonView, VM extends Common
     }
 
     private static class ControllerLifecycleObserver implements DefaultLifecycleObserver {
-        @NonNull
-        private final CommonViewController controller;
 
-        private ControllerLifecycleObserver(@NonNull CommonViewController controller) {
+        @NonNull
+        private final CommonViewController<?, ?> controller;
+
+        private ControllerLifecycleObserver(@NonNull CommonViewController<?, ?> controller) {
             this.controller = controller;
         }
 
