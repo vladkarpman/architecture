@@ -11,27 +11,28 @@ import io.shelfy.presentation.common.CommonActivity;
 import io.shelfy.presentation.common.component.ActivityComponent;
 import io.shelfy.presentation.common.component.BaseActivityComponent;
 import io.shelfy.presentation.common.module.BasePresentationModule;
+import io.shelfy.presentation.screensnavigator.ScreensNavigator;
 
 public abstract class BaseActivity extends CommonActivity {
 
-    protected ScreenNavigator screenNavigator;
+    protected ScreensNavigator screensNavigator;
 
     @CallSuper
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        screenNavigator = createScreenNavigator();
+        screensNavigator = createScreenNavigator();
     }
 
     @NonNull
-    public abstract ScreenNavigator createScreenNavigator();
+    public abstract ScreensNavigator createScreenNavigator();
 
     @NonNull
-    public final ScreenNavigator getScreenNavigator() {
-        if (screenNavigator == null) {
+    public final ScreensNavigator getScreensNavigator() {
+        if (screensNavigator == null) {
             throw new RuntimeException("Screen Navigator has to be initialized");
         }
-        return screenNavigator;
+        return screensNavigator;
     }
 
     @NonNull
@@ -45,5 +46,4 @@ public abstract class BaseActivity extends CommonActivity {
                         new ViewModelFactory(applicationComponent.getDomainModule()),
                         new ViewFactoryImpl(getLayoutInflater())));
     }
-
 }

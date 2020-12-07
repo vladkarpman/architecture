@@ -8,11 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.shelfy.domain.entity.Movie;
 import io.shelfy.presentation.BaseFragment;
-import io.shelfy.presentation.R;
-import io.shelfy.presentation.details.DetailsGalleryFragment;
 import io.shelfy.presentation.movies.view.MoviesView;
 import io.shelfy.presentation.movies.viewcontroller.MoviesViewController;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
@@ -42,11 +38,12 @@ public class MoviesFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        new MoviesViewController(
-                this,
+        final MoviesViewController moviesViewController = new MoviesViewController(
                 moviesView,
                 moviesViewModel,
-                screenNavigator);
+                screensNavigator);
+
+        moviesViewController.attachToLifecycle(this);
     }
 
     // TODO: 12/6/20 implement search

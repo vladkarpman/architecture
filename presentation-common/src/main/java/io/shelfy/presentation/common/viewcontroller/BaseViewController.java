@@ -36,10 +36,8 @@ public abstract class BaseViewController<V extends CommonView, VM extends Common
         );
     }
 
-    protected BaseViewController(@NonNull LifecycleOwner lifecycleOwner,
-                                 @NonNull V view,
-                                 @NonNull VM viewModel) {
-        this(view, viewModel);
+    @CallSuper
+    public void attachToLifecycle(@NonNull LifecycleOwner lifecycleOwner) {
         final ControllerLifecycleObserver lifecycleObserver = new ControllerLifecycleObserver(this);
         final Lifecycle lifecycle = lifecycleOwner.getLifecycle();
         lifecycle.addObserver(lifecycleObserver);

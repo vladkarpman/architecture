@@ -1,11 +1,11 @@
-package io.shelfy.presentation;
+package io.shelfy.presentation.screensnavigator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 
 import io.shelfy.domain.entity.Movie;
 
-public interface ScreenNavigator {
+public interface ScreensNavigator {
 
     @UiThread
     void showMovies();

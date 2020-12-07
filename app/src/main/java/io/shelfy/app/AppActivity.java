@@ -6,8 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import io.shelfy.presentation.BaseActivity;
-import io.shelfy.presentation.ScreenNavigator;
-import io.shelfy.presentation.movies.MoviesFragment;
+import io.shelfy.presentation.screensnavigator.ScreensNavigator;
 
 public class AppActivity extends BaseActivity {
 
@@ -17,13 +16,13 @@ public class AppActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            screenNavigator.showMovies();
+            screensNavigator.showMovies();
         }
     }
 
     @NonNull
     @Override
-    public ScreenNavigator createScreenNavigator() {
-        return new ScreenNavigatorImpl(this, getSupportFragmentManager());
+    public ScreensNavigator createScreenNavigator() {
+        return new ScreensNavigatorImpl(this, getSupportFragmentManager());
     }
 }
