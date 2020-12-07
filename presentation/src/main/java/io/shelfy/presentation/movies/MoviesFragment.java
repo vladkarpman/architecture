@@ -27,9 +27,7 @@ public class MoviesFragment extends BaseFragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         moviesView = fragmentComponent.getPresentationModule().provideView(MoviesView.class, container);
         return moviesView.getRootView();
     }

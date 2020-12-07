@@ -45,12 +45,12 @@ public abstract class BaseViewController<V extends CommonView, VM extends Common
     }
 
     @NonNull
-    protected final V getView() {
+    public final V getView() {
         return view;
     }
 
     @NonNull
-    protected final VM getViewModel() {
+    public final VM getViewModel() {
         return viewModel;
     }
 
