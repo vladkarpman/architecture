@@ -12,7 +12,8 @@ import io.reactivex.disposables.Disposables;
 import io.shelfy.presentation.common.view.CommonView;
 import io.shelfy.presentation.common.viewmodel.CommonViewModel;
 
-public abstract class BaseViewController<V extends CommonView, VM extends CommonViewModel> implements CommonViewController {
+public abstract class BaseViewController<V extends CommonView, VM extends CommonViewModel>
+        implements CommonViewController<V, VM> {
 
     protected final CompositeDisposable onPauseDisposables = new CompositeDisposable();
     protected final CompositeDisposable onStopDisposables = new CompositeDisposable();
@@ -24,12 +25,9 @@ public abstract class BaseViewController<V extends CommonView, VM extends Common
     @NonNull
     protected final VM viewModel;
 
-    protected BaseViewController(
-            @NonNull V view,
-            @NonNull VM viewModel) {
+    protected BaseViewController(@NonNull V view, @NonNull VM viewModel) {
         this.view = view;
         this.viewModel = viewModel;
-
         onDestroyDisposables.addAll(
                 Disposables.fromAction(view::onDestroy),
                 Disposables.fromAction(viewModel::onDestroy)
