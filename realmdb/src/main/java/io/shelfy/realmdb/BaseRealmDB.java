@@ -31,7 +31,7 @@ class BaseRealmDB {
             Schedulers.from(RealmThreadPoolExecutor.newDefaultExecutor()));
 
     @NonNull
-    public static Scheduler realmScheduler() {
+    static Scheduler realmScheduler() {
         return REALM_SCHEDULER_SUPPLIER.get();
     }
 
@@ -42,85 +42,85 @@ class BaseRealmDB {
         this.realmConfiguration = realmConfiguration;
     }
 
-    public <T> Single<T> read(@NonNull Function<Realm, T> reader) {
-        return fetchAsync(realmConfiguration, reader::apply);
+    public <T> Single<T> get(@NonNull Function<Realm, T> query) {
+        return get(realmConfiguration, query::apply);
     }
 
-    public <T extends RealmModel, E> Single<List<E>> read(@NonNull Class<T> clazz, @NonNull Mapper<T, E> mapper) {
-        return fetchAsync(realmConfiguration, realm ->
+    public <T extends RealmModel, E> Single<List<E>> get(@NonNull Class<T> clazz, @NonNull Mapper<T, E> mapper) {
+        return get(realmConfiguration, realm ->
                 Observable.fromIterable(realm.where(clazz).findAll())
                         .map(mapper::map)
                         .toList()
                         .blockingGet());
     }
 
-    public <T extends RealmModel, E> Single<List<E>> read(
+    public <T extends RealmModel, E> Single<List<E>> get(
             @NonNull Class<T> clazz,
             @NonNull Mapper<RealmQuery<T>, RealmQuery<T>> realmQueryMapper,
             @NonNull Mapper<T, E> objectsMapper) {
-        return fetchAsync(realmConfiguration, realm ->
+        return get(realmConfiguration, realm ->
                 Observable.fromIterable(realmQueryMapper.map(realm.where(clazz)).findAll())
                         .map(objectsMapper::map)
                         .toList()
                         .blockingGet());
     }
 
-    public <T extends RealmModel> Completable create(Collection<T> objects) {
-        return executeAsync(realmConfiguration, realm -> realm.insert(objects))
+    public <T extends RealmModel> Completable insert(Collection<T> objects) {
+        return execute(realmConfiguration, realm -> realm.insert(objects))
                 .subscribeOn(realmScheduler());
     }
 
-    public <E, T extends RealmModel> Completable create(Collection<E> objects, @NonNull Mapper<E, T> mapper) {
+    public <E, T extends RealmModel> Completable insert(Collection<E> objects, @NonNull Mapper<E, T> mapper) {
         return Observable.fromIterable(objects)
                 .map(mapper::map)
                 .toList()
-                .flatMapCompletable(this::create)
+                .flatMapCompletable(this::insert)
                 .subscribeOn(realmScheduler());
     }
 
     public Completable execute(@NonNull Consumer<Realm> executeFunction) {
-        return executeAsync(realmConfiguration, executeFunction::accept)
+        return execute(realmConfiguration, executeFunction::accept)
                 .subscribeOn(realmScheduler());
     }
 
-    public <T extends RealmModel> Completable update(
+    public <T extends RealmModel> Completable insertOrUpdate(
             @NonNull Class<T> clazz,
-            @NonNull Function<RealmQuery<T>, RealmQuery<T>> fetchFunction) {
-        return executeAsync(realmConfiguration, realm -> {
-            final RealmResults<T> results = fetchFunction.apply(realm.where(clazz)).findAll();
+            @NonNull Function<RealmQuery<T>, RealmQuery<T>> query) {
+        return execute(realmConfiguration, realm -> {
+            final RealmResults<T> results = query.apply(realm.where(clazz)).findAll();
             realm.insertOrUpdate(results);
         });
     }
 
-    public <T extends RealmModel> Completable update(T object) {
-        return executeAsync(realmConfiguration, realm -> realm.insertOrUpdate(Collections.singleton(object)))
+    public <T extends RealmModel> Completable insertOrUpdate(T object) {
+        return execute(realmConfiguration, realm -> realm.insertOrUpdate(Collections.singleton(object)))
                 .subscribeOn(realmScheduler());
     }
 
-    public <T extends RealmModel, E> Completable update(E object, @NonNull Mapper<E, T> mapper) {
-        return update(Collections.singleton(mapper.map(object)))
+    public <T extends RealmModel, E> Completable insertOrUpdate(E object, @NonNull Mapper<E, T> mapper) {
+        return insertOrUpdate(Collections.singleton(mapper.map(object)))
                 .subscribeOn(realmScheduler());
     }
 
-    public <T extends RealmModel> Completable update(@NonNull Collection<T> objects) {
-        return executeAsync(realmConfiguration, realm -> realm.insertOrUpdate(objects))
+    public <T extends RealmModel> Completable insertOrUpdate(@NonNull Collection<T> objects) {
+        return execute(realmConfiguration, realm -> realm.insertOrUpdate(objects))
                 .subscribeOn(realmScheduler());
     }
 
-    public <From, To extends RealmModel> Completable update(@NonNull Collection<From> objects,
-                                                            @NonNull Mapper<From, To> mapper) {
+    public <From, To extends RealmModel> Completable insertOrUpdate(@NonNull Collection<From> objects,
+                                                                    @NonNull Mapper<From, To> mapper) {
         return Observable.fromIterable(objects)
                 .map(mapper::map)
                 .toList()
-                .flatMapCompletable(this::update);
+                .flatMapCompletable(this::insertOrUpdate);
     }
 
-    private static <T> Single<T> fetchAsync(
+    private static <T> Single<T> get(
             @NonNull RealmConfiguration realmConfiguration,
-            @NonNull io.reactivex.functions.Function<Realm, T> fetcher) {
+            @NonNull io.reactivex.functions.Function<Realm, T> reader) {
         return Single.<T>create(emitter -> {
             try (Realm realm = Realm.getInstance(realmConfiguration)) {
-                final T result = fetcher.apply(realm);
+                final T result = reader.apply(realm);
                 emitter.onSuccess(result);
             } catch (Exception error) {
                 emitter.onError(error);
@@ -128,8 +128,8 @@ class BaseRealmDB {
         }).subscribeOn(realmScheduler());
     }
 
-    private static Completable executeAsync(@NonNull RealmConfiguration realmConfiguration,
-                                            @NonNull Realm.Transaction transaction) {
+    private static Completable execute(@NonNull RealmConfiguration realmConfiguration,
+                                       @NonNull Realm.Transaction transaction) {
         return Completable.create(emitter -> {
             try (Realm realm = Realm.getInstance(realmConfiguration)) {
                 realm.executeTransaction(transaction);
@@ -140,14 +140,14 @@ class BaseRealmDB {
         }).subscribeOn(realmScheduler());
     }
 
-    private static <T> Single<T> executeAndFetchAsync(
+    private static <T> Single<T> executeAndGet(
             @NonNull RealmConfiguration realmConfiguration,
-            @NonNull io.reactivex.functions.Function<Realm, T> fetcher) {
+            @NonNull Function<Realm, T> query) {
         return Single.<T>create(emitter -> {
             try (Realm realm = Realm.getInstance(realmConfiguration)) {
                 realm.executeTransaction(realmInstance -> {
                     try {
-                        emitter.onSuccess(fetcher.apply(realmInstance));
+                        emitter.onSuccess(query.apply(realmInstance));
                     } catch (Exception e) {
                         emitter.onError(e);
                     }

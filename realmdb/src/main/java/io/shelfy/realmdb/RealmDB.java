@@ -25,7 +25,7 @@ class RealmDB extends BaseRealmDB implements LocalDataSource {
 
     @Override
     public Completable saveMovies(List<Movie> movies) {
-        return update(movies, (Mapper<Movie, MovieRealm>) this::map);
+        return insertOrUpdate(movies, (Mapper<Movie, MovieRealm>) this::map);
     }
 
     @Override
@@ -42,32 +42,30 @@ class RealmDB extends BaseRealmDB implements LocalDataSource {
 
     @Override
     public Single<List<Movie>> getMovies() {
-        return read(MovieRealm.class, this::map);
+        return get(MovieRealm.class, this::map);
     }
 
     @Override
     public Maybe<MovieVideo> getMovieVideo(int movieId) {
-        return read(
+        return get(
                 realm -> {
                     final MovieRealm movieRealm = realm.where(MovieRealm.class)
                             .equalTo("id", movieId)
                             .findFirst();
 
                     if (movieRealm == null) {
-                        return new AtomicReference<MovieVideo>();
+                        return new AtomicReference<MovieVideoRealm>();
                     }
 
                     final RealmResults<MovieVideoRealm> videoRealms = movieRealm.getMovieVideoRealms();
                     if (videoRealms != null) {
-                        MovieVideoRealm videoRealm = videoRealms.first(null);
-                        if (videoRealm != null) {
-                            return new AtomicReference<>(map(movieId, videoRealm));
-                        }
+                        return new AtomicReference<>(videoRealms.first(null));
                     }
-                    return new AtomicReference<MovieVideo>();
+                    return new AtomicReference<MovieVideoRealm>();
                 })
                 .filter(optional -> optional.get() != null)
-                .map(AtomicReference::get);
+                .map(AtomicReference::get)
+                .map(videoRealm -> map(movieId, videoRealm));
     }
 
     @NonNull
