@@ -10,11 +10,8 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.lifecycle.ViewModel;
 
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.exceptions.OnErrorNotImplementedException;
-import io.shelfy.presentation.common.R;
 
 
 public abstract class BaseView implements CommonView {

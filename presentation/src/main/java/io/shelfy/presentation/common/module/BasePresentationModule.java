@@ -12,7 +12,9 @@ import androidx.lifecycle.ViewModelStoreOwner;
 
 import io.shelfy.presentation.common.view.CommonView;
 import io.shelfy.presentation.common.view.factory.ViewFactory;
+import io.shelfy.presentation.common.viewmodel.BaseViewModelFactory;
 import io.shelfy.presentation.common.viewmodel.CommonViewModel;
+import io.shelfy.presentation.common.viewmodel.ViewModelFactory;
 
 public class BasePresentationModule implements PresentationModule {
 
@@ -25,7 +27,7 @@ public class BasePresentationModule implements PresentationModule {
     private ViewModelProvider viewModelProvider;
 
     @NonNull
-    final ViewModelProvider.Factory viewModelFactory;
+    final ViewModelFactory viewModelFactory;
 
     @NonNull
     final ViewFactory viewFactory;
@@ -33,7 +35,7 @@ public class BasePresentationModule implements PresentationModule {
     public BasePresentationModule(
             @NonNull LifecycleOwner lifecycleOwner,
             @NonNull ViewModelStoreOwner storeOwner,
-            @NonNull ViewModelProvider.Factory viewModelFactory,
+            @NonNull ViewModelFactory viewModelFactory,
             @NonNull ViewFactory viewFactory) {
         this.lifecycleOwner = lifecycleOwner;
         this.storeOwner = storeOwner;
@@ -53,8 +55,8 @@ public class BasePresentationModule implements PresentationModule {
 
     @Override
     @NonNull
-    public <VM extends ViewModel & CommonViewModel> VM provideViewModel(@NonNull Class<VM> viewModelClass) {
-        return provideViewModelProvider().get(viewModelClass);
+    public <VM extends CommonViewModel> VM provideViewModel(@NonNull Class<VM> viewModelClass) {
+        return (VM) provideViewModelProvider().get(viewModelFactory.getImplementationClass(viewModelClass));
     }
 
     @Override

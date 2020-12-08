@@ -11,11 +11,12 @@ import androidx.annotation.Nullable;
 import io.shelfy.presentation.BaseFragment;
 import io.shelfy.presentation.movies.view.MoviesView;
 import io.shelfy.presentation.movies.viewcontroller.MoviesViewController;
+import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModelImpl;
 
 public class MoviesFragment extends BaseFragment {
 
-    private MoviesViewModelImpl moviesViewModel;
+    private MoviesViewModel moviesViewModel;
     private MoviesView moviesView;
 
     @Override
@@ -23,7 +24,7 @@ public class MoviesFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         moviesViewModel = fragmentComponent.getPresentationModule()
-                .provideViewModel(MoviesViewModelImpl.class);
+                .provideViewModel(MoviesViewModel.class);
     }
 
     @Nullable

@@ -18,15 +18,27 @@ public class ViewModelFactoryImpl extends BaseViewModelFactory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.equals(MoviesViewModel.class)) {
+        if (MoviesViewModel.class.isAssignableFrom(modelClass)) {
             return (T) new MoviesViewModelImpl(
                     domainModule.provideGetPopularMoviesUseCase(),
                     domainModule.provideGetMoviesByQueryUseCase());
         }
-        if (modelClass.equals(MovieDetailsViewModel.class)) {
+        if (MovieDetailsViewModel.class.isAssignableFrom(modelClass)) {
             return (T) new MovieDetailsViewModel(
                     domainModule.provideGetMovieTrailerUseCase(),
                     domainModule.provideGetMovieByIdUseCase());
+        }
+        throw new RuntimeException();
+    }
+
+    @NonNull
+    @Override
+    public <T extends ViewModel> Class<T> getImplementationClass(Class<?> modelClass) {
+        if (modelClass.equals(MoviesViewModel.class)) {
+            return (Class<T>) MoviesViewModelImpl.class;
+        }
+        if (modelClass.equals(MovieDetailsViewModel.class)) {
+            return (Class<T>) MovieDetailsViewModel.class;
         }
         throw new RuntimeException();
     }

@@ -53,7 +53,7 @@ public class DetailsGalleryFragment extends BaseFragment {
             currentPosition.set(arguments.getInt(ARGS_MOVIE_POSITION));
         }
 
-        viewModel = fragmentComponent.getPresentationModule().provideViewModel(MoviesViewModelImpl.class);
+        viewModel = fragmentComponent.getPresentationModule().provideViewModel(MoviesViewModel.class);
         viewModel.getMovies().observe(getViewLifecycleOwner(), movies -> {
             detailsFragmentAdapter.setData(movies);
             int currentItem = -1;

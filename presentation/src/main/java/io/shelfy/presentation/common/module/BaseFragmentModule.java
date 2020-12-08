@@ -2,14 +2,14 @@ package io.shelfy.presentation.common.module;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import io.shelfy.presentation.common.view.factory.ViewFactory;
+import io.shelfy.presentation.common.viewmodel.ViewModelFactory;
 
 public class BaseFragmentModule extends BasePresentationModule implements FragmentModule {
 
     public BaseFragmentModule(@NonNull Fragment fragment,
-                              @NonNull ViewModelProvider.Factory viewModelFactory,
+                              @NonNull ViewModelFactory viewModelFactory,
                               @NonNull ViewFactory viewFactory) {
         super(fragment, fragment, viewModelFactory, viewFactory);
     }

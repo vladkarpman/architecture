@@ -61,7 +61,8 @@ public class DetailsFragment extends BaseFragment {
         tvOverview = view.findViewById(R.id.tvOverview);
         btnTrailer = view.findViewById(R.id.btnTrailer);
 
-        viewModel = fragmentComponent.getPresentationModule().provideViewModel(MovieDetailsViewModel.class);
+        viewModel = fragmentComponent.getPresentationModule()
+                .provideViewModel(MovieDetailsViewModel.class);
 
         onDestroyDisposables.add(viewModel.getMovie(movieId)
                 .observeOn(AndroidSchedulers.mainThread())
