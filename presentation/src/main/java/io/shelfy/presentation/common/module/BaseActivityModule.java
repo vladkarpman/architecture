@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import io.shelfy.presentation.common.screensnavigator.ScreensNavigator;
 import io.shelfy.presentation.common.view.factory.ViewFactory;
-import io.shelfy.presentation.common.viewmodel.ViewModelFactory;
+import io.shelfy.presentation.common.viewmodel.factory.ViewModelFactory;
 
 public class BaseActivityModule extends BasePresentationModule implements ActivityModule {
 

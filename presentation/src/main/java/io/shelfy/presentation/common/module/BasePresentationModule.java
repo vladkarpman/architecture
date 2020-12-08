@@ -6,15 +6,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import io.shelfy.presentation.common.view.CommonView;
 import io.shelfy.presentation.common.view.factory.ViewFactory;
-import io.shelfy.presentation.common.viewmodel.BaseViewModelFactory;
 import io.shelfy.presentation.common.viewmodel.CommonViewModel;
-import io.shelfy.presentation.common.viewmodel.ViewModelFactory;
+import io.shelfy.presentation.common.viewmodel.factory.ViewModelFactory;
 
 public class BasePresentationModule implements PresentationModule {
 

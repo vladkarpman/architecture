@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import io.shelfy.presentation.common.view.factory.ViewFactory;
-import io.shelfy.presentation.common.viewmodel.ViewModelFactory;
+import io.shelfy.presentation.common.viewmodel.factory.ViewModelFactory;
 
 public class BaseFragmentModule extends BasePresentationModule implements FragmentModule {
 

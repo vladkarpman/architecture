@@ -1,8 +1,6 @@
-package io.shelfy.presentation.common.viewmodel;
+package io.shelfy.presentation.common.viewmodel.factory;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 
 import io.shelfy.domain.DomainModule;
 

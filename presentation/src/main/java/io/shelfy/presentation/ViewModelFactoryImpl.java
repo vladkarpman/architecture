@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
 import io.shelfy.domain.DomainModule;
-import io.shelfy.presentation.common.viewmodel.BaseViewModelFactory;
+import io.shelfy.presentation.common.viewmodel.factory.BaseViewModelFactory;
 import io.shelfy.presentation.details.viewmodel.MovieDetailsViewModel;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModelImpl;
