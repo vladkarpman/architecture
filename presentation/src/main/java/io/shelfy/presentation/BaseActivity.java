@@ -1,38 +1,20 @@
 package io.shelfy.presentation;
 
-import android.os.Bundle;
-
-import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import io.shelfy.presentation.common.component.ApplicationComponent;
 import io.shelfy.presentation.common.CommonActivity;
 import io.shelfy.presentation.common.component.ActivityComponent;
+import io.shelfy.presentation.common.component.ApplicationComponent;
 import io.shelfy.presentation.common.component.BaseActivityComponent;
-import io.shelfy.presentation.common.module.BasePresentationModule;
-import io.shelfy.presentation.screensnavigator.ScreensNavigator;
+import io.shelfy.presentation.common.module.BaseActivityModule;
+import io.shelfy.presentation.common.screensnavigator.ScreensNavigator;
+import io.shelfy.presentation.common.screensnavigator.ScreensNavigatorImpl;
 
 public abstract class BaseActivity extends CommonActivity {
 
-    protected ScreensNavigator screensNavigator;
-
-    @CallSuper
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        screensNavigator = createScreenNavigator();
-    }
-
-    @NonNull
-    public abstract ScreensNavigator createScreenNavigator();
-
     @NonNull
     public final ScreensNavigator getScreensNavigator() {
-        if (screensNavigator == null) {
-            throw new RuntimeException("Screen Navigator has to be initialized");
-        }
-        return screensNavigator;
+        return activityComponent.getPresentationModule().getScreensNavigator();
     }
 
     @NonNull
@@ -40,10 +22,10 @@ public abstract class BaseActivity extends CommonActivity {
     protected ActivityComponent createActivityComponent(@NonNull ApplicationComponent applicationComponent) {
         return new BaseActivityComponent(
                 applicationComponent,
-                new BasePresentationModule(
+                new BaseActivityModule(
                         this,
-                        this,
-                        new ViewModelFactory(applicationComponent.getDomainModule()),
+                        new ScreensNavigatorImpl(this, getSupportFragmentManager(), getFragmentContainer()),
+                        new ViewModelFactoryImpl(applicationComponent.getDomainModule()),
                         new ViewFactoryImpl(getLayoutInflater())));
     }
 }

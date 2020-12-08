@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
-import androidx.lifecycle.LiveDataReactiveStreams;
 
 import com.bumptech.glide.Glide;
 
@@ -21,7 +20,6 @@ import io.shelfy.domain.entity.MovieVideo;
 import io.shelfy.presentation.BaseFragment;
 import io.shelfy.presentation.R;
 import io.shelfy.domain.entity.Movie;
-import io.shelfy.presentation.common.CommonFragment;
 import io.shelfy.presentation.details.viewmodel.MovieDetailsViewModel;
 
 public class DetailsFragment extends BaseFragment {

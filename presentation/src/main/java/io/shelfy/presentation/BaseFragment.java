@@ -9,8 +9,8 @@ import io.shelfy.presentation.common.CommonFragment;
 import io.shelfy.presentation.common.component.ActivityComponent;
 import io.shelfy.presentation.common.component.FragmentComponent;
 import io.shelfy.presentation.common.component.BaseFragmentComponent;
-import io.shelfy.presentation.common.module.BasePresentationModule;
-import io.shelfy.presentation.screensnavigator.ScreensNavigator;
+import io.shelfy.presentation.common.module.BaseFragmentModule;
+import io.shelfy.presentation.common.screensnavigator.ScreensNavigator;
 
 public abstract class BaseFragment extends CommonFragment {
 
@@ -36,10 +36,9 @@ public abstract class BaseFragment extends CommonFragment {
     protected FragmentComponent createFragmentComponent(@NonNull ActivityComponent activityComponent) {
         return new BaseFragmentComponent(
                 activityComponent,
-                new BasePresentationModule(
+                new BaseFragmentModule(
                         this,
-                        this,
-                        new ViewModelFactory(activityComponent.getApplicationComponent().getDomainModule()),
+                        new ViewModelFactoryImpl(activityComponent.getParentComponent().getDomainModule()),
                         new ViewFactoryImpl(getLayoutInflater())));
     }
 }

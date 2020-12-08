@@ -5,8 +5,7 @@ import androidx.lifecycle.LifecycleOwner;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.shelfy.domain.entity.Movie;
-import io.shelfy.presentation.movies.viewmodel.MoviesViewModelImpl;
-import io.shelfy.presentation.screensnavigator.ScreensNavigator;
+import io.shelfy.presentation.common.screensnavigator.ScreensNavigator;
 import io.shelfy.presentation.common.viewcontroller.BaseViewController;
 import io.shelfy.presentation.movies.view.MoviesView;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;

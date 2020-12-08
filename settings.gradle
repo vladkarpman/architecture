@@ -1,5 +1,4 @@
 include ':utils'
-include ':presentation-common'
 include ':app'
 include ':realmdb'
 include ':restapi'

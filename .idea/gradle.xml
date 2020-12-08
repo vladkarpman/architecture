@@ -15,7 +15,6 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/presentation" />
-            <option value="$PROJECT_DIR$/presentation-common" />
             <option value="$PROJECT_DIR$/realmdb" />
             <option value="$PROJECT_DIR$/repository" />
             <option value="$PROJECT_DIR$/restapi" />

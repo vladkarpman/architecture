@@ -2,11 +2,9 @@ package io.shelfy.app;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import io.shelfy.presentation.BaseActivity;
-import io.shelfy.presentation.screensnavigator.ScreensNavigator;
 
 public class AppActivity extends BaseActivity {
 
@@ -16,13 +14,12 @@ public class AppActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            screensNavigator.showMovies();
+            getScreensNavigator().showMovies();
         }
     }
 
-    @NonNull
     @Override
-    public ScreensNavigator createScreenNavigator() {
-        return new ScreensNavigatorImpl(this, getSupportFragmentManager());
+    protected int getFragmentContainer() {
+        return R.id.fragment_container;
     }
 }
