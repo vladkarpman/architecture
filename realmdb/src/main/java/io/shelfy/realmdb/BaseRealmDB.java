@@ -3,7 +3,6 @@ package io.shelfy.realmdb;
 
 import androidx.arch.core.util.Function;
 import androidx.core.util.Consumer;
-import androidx.core.util.Supplier;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -20,9 +19,7 @@ import io.realm.RealmConfiguration;
 import io.realm.RealmModel;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
-import io.realm.internal.async.RealmThreadPoolExecutor;
 import io.shelfy.utils.Mapper;
-import io.shelfy.utils.Suppliers;
 
 
 class BaseRealmDB {
