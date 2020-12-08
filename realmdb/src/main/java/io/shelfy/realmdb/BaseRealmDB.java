@@ -27,12 +27,9 @@ import io.shelfy.utils.Suppliers;
 
 class BaseRealmDB {
 
-    private static final Supplier<Scheduler> REALM_SCHEDULER_SUPPLIER = Suppliers.memoize(() ->
-            Schedulers.from(RealmThreadPoolExecutor.newDefaultExecutor()));
-
     @NonNull
     static Scheduler realmScheduler() {
-        return REALM_SCHEDULER_SUPPLIER.get();
+        return Schedulers.io();
     }
 
     @NonNull
