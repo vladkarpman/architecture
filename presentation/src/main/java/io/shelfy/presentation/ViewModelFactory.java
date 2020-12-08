@@ -7,6 +7,7 @@ import io.shelfy.domain.DomainModule;
 import io.shelfy.presentation.common.viewmodel.BaseViewModelFactory;
 import io.shelfy.presentation.details.viewmodel.MovieDetailsViewModel;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
+import io.shelfy.presentation.movies.viewmodel.MoviesViewModelImpl;
 
 public class ViewModelFactory extends BaseViewModelFactory {
 
@@ -18,7 +19,7 @@ public class ViewModelFactory extends BaseViewModelFactory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.equals(MoviesViewModel.class)) {
-            return (T) new MoviesViewModel(
+            return (T) new MoviesViewModelImpl(
                     domainModule.provideGetPopularMoviesUseCase(),
                     domainModule.provideGetMoviesByQueryUseCase());
         }

@@ -11,18 +11,19 @@ import androidx.annotation.Nullable;
 import io.shelfy.presentation.BaseFragment;
 import io.shelfy.presentation.movies.view.MoviesView;
 import io.shelfy.presentation.movies.viewcontroller.MoviesViewController;
-import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
+import io.shelfy.presentation.movies.viewmodel.MoviesViewModelImpl;
 
 public class MoviesFragment extends BaseFragment {
 
-    private MoviesViewModel moviesViewModel;
+    private MoviesViewModelImpl moviesViewModel;
     private MoviesView moviesView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        moviesViewModel = fragmentComponent.getPresentationModule().provideViewModel(MoviesViewModel.class);
+        moviesViewModel = fragmentComponent.getPresentationModule()
+                .provideViewModel(MoviesViewModelImpl.class);
     }
 
     @Nullable
@@ -42,6 +43,10 @@ public class MoviesFragment extends BaseFragment {
                 screensNavigator);
 
         moviesViewController.attachToLifecycle(this);
+    }
+
+    private void showMoviesStartWith(String query) {
+        moviesViewModel.search(query);
     }
 
     // TODO: 12/6/20 implement search
@@ -69,8 +74,4 @@ public class MoviesFragment extends BaseFragment {
 //        }
 //        return super.onCreateOptionsMenu(menu);
 //    }
-
-    private void showMoviesStartWith(String query) {
-        moviesViewModel.search(query);
-    }
 }

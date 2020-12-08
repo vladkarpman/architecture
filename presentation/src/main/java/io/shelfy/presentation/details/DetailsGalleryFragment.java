@@ -8,15 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
-import java.util.Collections;
-import java.util.Observable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.shelfy.domain.entity.Movie;
 import io.shelfy.presentation.BaseFragment;
 import io.shelfy.presentation.R;
-import io.shelfy.presentation.common.CommonFragment;
 import io.shelfy.presentation.movies.viewmodel.MoviesViewModel;
+import io.shelfy.presentation.movies.viewmodel.MoviesViewModelImpl;
 
 public class DetailsGalleryFragment extends BaseFragment {
 
@@ -55,7 +53,7 @@ public class DetailsGalleryFragment extends BaseFragment {
             currentPosition.set(arguments.getInt(ARGS_MOVIE_POSITION));
         }
 
-        viewModel = fragmentComponent.getPresentationModule().provideViewModel(MoviesViewModel.class);
+        viewModel = fragmentComponent.getPresentationModule().provideViewModel(MoviesViewModelImpl.class);
         viewModel.getMovies().observe(getViewLifecycleOwner(), movies -> {
             detailsFragmentAdapter.setData(movies);
             int currentItem = -1;
